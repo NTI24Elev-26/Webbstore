@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameCompany - Registrera Dig</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="container header-grid">
+        <div class="header-logo">
+            <a href="index.html">Logga</a>
+        </div>
+        <div class="header-search">
+            <input type="search" id="header-search-input" placeholder="Sök spel...">
+            <a href="#" id="header-search-btn" class="search-btn btn">Sök</a>
+        </div>
+        <div class="header-user-actions" id="header-user-actions">
+            <a href="wishlist.html" class="btn wishlist-btn">Önskelista (<span id="wishlist-count">0</span>)</a>
+            <a href="login.html" class="btn login-btn" id="login-link">Logga In</a>
+            <a href="cart.html" class="btn cart-btn">Varukorg (<span id="cart-count">0</span>)</a>
+        </div>
+    </div>
+</header>
+<main class="container page-content form-page">
+    <h1>Registrera Dig</h1>
+    <form id="register-form" class="auth-form">
+        <div class="form-group">
+            <label for="reg-username">Välj Användarnamn:</label>
+            <input type="text" id="reg-username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="reg-password">Välj Lösenord:</label>
+            <input type="password" id="reg-password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="reg-password-confirm">Bekräfta Lösenord:</label>
+            <input type="password" id="reg-password-confirm" name="passwordConfirm" required>
+        </div>
+        <button type="submit" class="btn primary-btn">Registrera</button>
+    </form>
+    <p>Har du redan ett konto? <a href="login.html">Logga In</a></p>
+</main>
+
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-logo">Logga</div>
+        <div class="footer-info">
+            <p>Information</p>
+        </div>
+        <div class="footer-heading">
+            <p>Heading</p>
+        </div>
+    </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+<script src="register.js"></script> </body>
+</html>

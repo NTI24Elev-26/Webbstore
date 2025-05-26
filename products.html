@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameCompany - Alla Spel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="container header-grid">
+        <div class="header-logo">
+            <a href="index.html">Logga</a>
+        </div>
+        <div class="header-search">
+            <input type="search" id="header-search-input" placeholder="Sök spel...">
+            <a href="#" id="header-search-btn" class="search-btn btn">Sök</a>
+        </div>
+        <div class="header-user-actions" id="header-user-actions">
+            <a href="wishlist.html" class="btn wishlist-btn">Önskelista (<span id="wishlist-count">0</span>)</a>
+            <a href="login.html" class="btn login-btn" id="login-link">Logga In</a>
+            <a href="cart.html" class="btn cart-btn">Varukorg (<span id="cart-count">0</span>)</a>
+        </div>
+    </div>
+</header>
+
+<main class="container products-layout">
+    <aside class="sidebar">
+        <div class="sidebar-block">
+            <h3>Sök i butiken</h3>
+            <input type="search" id="sidebar-search-input" placeholder="Sök...">
+        </div>
+        <div class="sidebar-block">
+            <h3>Filter efter tagg</h3>
+            <ul id="tag-filters">
+            </ul>
+        </div>
+        <div class="sidebar-block">
+            <h3>Sortering</h3>
+            <ul>
+                <li class="sort-option" data-sort="price-asc">Pris (stigande)</li>
+                <li class="sort-option" data-sort="price-desc">Pris (fallande)</li>
+                <li class="sort-option" data-sort="name-asc">Namn (A-Ö)</li>
+            </ul>
+        </div>
+    </aside>
+
+    <section class="all-products-section">
+        <h2 id="products-heading">Alla Spel</h2>
+        <div class="product-grid" id="all-games-grid">
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-logo">Logga</div>
+        <div class="footer-info">
+            <p>Information</p>
+        </div>
+        <div class="footer-heading">
+            <p>Heading</p>
+        </div>
+    </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="products.js"></script>
+<script src="script.js"></script> </body>
+</html>

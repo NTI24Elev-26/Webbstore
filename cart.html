@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameCompany - Min Varukorg</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="container header-grid">
+        <div class="header-logo">
+            <a href="index.html">Logga</a>
+        </div>
+        <div class="header-search">
+            <input type="search" id="header-search-input" placeholder="Sök spel...">
+            <a href="#" id="header-search-btn" class="search-btn btn">Sök</a>
+        </div>
+        <div class="header-user-actions" id="header-user-actions">
+            <a href="wishlist.html" class="btn wishlist-btn">Önskelista (<span id="wishlist-count">0</span>)</a>
+            <a href="login.html" class="btn login-btn" id="login-link">Logga In</a>
+            <a href="cart.html" class="btn cart-btn">Varukorg (<span id="cart-count">0</span>)</a>
+        </div>
+    </div>
+</header>
+
+<main class="container page-content">
+    <h1>Min Varukorg</h1>
+    <div class="empty-message" id="cart-empty-message" style="display: none;">
+        <p>Din varukorg är tom. Dags att fylla den med fantastiska spel!</p>
+        <a href="products.html" class="btn primary-btn">Gå till Butiken</a>
+    </div>
+    <div class="product-list-container" id="cart-items">
+    </div>
+    <div class="cart-summary" id="cart-summary" style="display: none;">
+        <p>Total summa: <span id="cart-total">0 SEK</span></p>
+        <button class="btn primary-btn checkout-btn">Gå till Kassan</button>
+        <button class="btn secondary-btn clear-cart-btn">Töm varukorg</button>
+    </div>
+</main>
+
+
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-logo">Logga</div>
+        <div class="footer-info">
+            <p>Information</p>
+        </div>
+        <div class="footer-heading">
+            <p>Heading</p>
+        </div>
+    </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="script.js"></script> </body>
+</html>

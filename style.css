@@ -1,0 +1,647 @@
+/* Generella stilar (behålls liknande) */
+:root {
+    --bg-color: #1a1a1a; /* Mörk bakgrund */
+    --text-color: #f0f0f0; /* Ljus text */
+    --primary-color: #007bff; /* Blåaktig accent */
+    --secondary-color: #28a745; /* Grönaktig accent */
+    --hover-color: #0056b3;
+    --card-bg: #2a2a2a; /* Mörkare grå för kort */
+    --border-color: #444; /* Gråaktig kant */
+    --placeholder-bg: #444; /* Grå för platshållarbilder */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding-top: 90px;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Oxanium', cursive;
+    color: var(--primary-color);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.primary-btn:hover {
+    background-color: var(--hover-color);
+    text-decoration: none;
+}
+
+.secondary-btn {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.secondary-btn:hover {
+    background-color: #218838;
+    text-decoration: none;
+}
+
+/* Header - Anpassad till Wireframe */
+header {
+    /* Lägg till/ändra dessa rader: */
+    position: fixed; /* Låser headern till webbläsarfönstret */
+    top: 0;          /* Placerar den högst upp */
+    left: 0;         /* Placerar den längst till vänster */
+    width: 100%;     /* Får den att sträcka sig över hela bredden */
+    z-index: 1000;   /* Se till att den ligger över annat innehåll när man skrollar */
+
+    /* Dina befintliga stilar för headern: */
+    background-color: var(--header-bg); /* Antar att du har en variabel för detta */
+    padding: 20px 0; /* Justera padding efter behov */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Valfritt: ger en liten skugga */
+    /* ... andra befintliga stilar för headern ... */
+}
+
+.header-grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* Logga, sökfält, användar-actions */
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap; /* För responsivitet */
+}
+
+.header-logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.header-search {
+    display: flex;
+    gap: 5px;
+}
+
+.header-search input[type="search"] {
+    flex-grow: 1; /* Tar upp tillgängligt utrymme */
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.header-search .search-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.header-user-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Main Content - Anpassad till Wireframe */
+main {
+    padding: 40px 0;
+}
+
+.main-layout {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column; /* Staplar sektionerna vertikalt */
+    gap: 40px; /* Mellanrum mellan sektionerna */
+}
+
+.product-section {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-section h2 {
+    text-align: left; /* Enligt wireframe, "Text" som rubrik */
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 4 kolumner, justeras på mindre skärmar */
+    gap: 20px;
+    margin-bottom: 25px; /* Mellanrum till "Visa mer"-knapp */
+}
+
+.product-card {
+    background-color: var(--bg-color); /* Lättare bakgrund för korten */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image-placeholder {
+    width: 100%;
+    /* Aspect ratio 4:3 för att likna wireframens boxar */
+    padding-bottom: 75%; /* 3/4 av bredden för höjd */
+    background-color: var(--placeholder-bg);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative; /* För att kunna lägga till en X */
+}
+
+.product-image-placeholder::before,
+.product-image-placeholder::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%; /* Storleken på X */
+    height: 3px;
+    background-color: var(--text-color);
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.product-image-placeholder::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.product-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.product-card .add-to-cart-btn {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.product-card .add-to-cart-btn:hover {
+    background-color: var(--hover-color);
+}
+
+.view-more-btn {
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+/* Footer - Anpassad till Wireframe */
+footer {
+    background-color: var(--card-bg);
+    padding: 30px 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* Logga, information, heading */
+    gap: 20px;
+    align-items: center;
+}
+
+.footer-logo, .footer-info, .footer-heading {
+    color: var(--text-color);
+    font-weight: bold;
+    /* Placering enligt wireframe, text är enkel platshållare */
+}
+
+/* Responsivitet för mindre skärmar */
+@media (max-width: 768px) {
+    .header-grid {
+        grid-template-columns: 1fr; /* Stacka elementen */
+        justify-items: center; /* Centrera dem */
+    }
+    .header-search {
+        width: 100%; /* Sökfältet tar hela bredden */
+    }
+    .header-user-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Färre kolumner på små skärmar */
+    }
+    .footer-grid {
+        grid-template-columns: 1fr; /* Stacka footer-elementen */
+        justify-items: center;
+    }
+}
+/* Layout för produkter med sidopanel */
+.products-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr; /* Sidopanel 250px, huvuddel tar resten */
+    gap: 40px;
+}
+
+.sidebar {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-block {
+    margin-bottom: 30px;
+}
+
+.sidebar-block h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.sidebar-block ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-block ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.sidebar-block ul li:hover {
+    color: var(--primary-color);
+}
+
+.sidebar-block input[type="search"] {
+    width: calc(100% - 24px); /* Full bredd minus padding */
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.placeholder-block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.box-placeholder {
+    width: 80px; /* Storlek som matchar wireframen */
+    height: 80px;
+    background-color: var(--placeholder-bg);
+    border-radius: 5px;
+}
+
+
+/* Responsivitet för products-layout */
+@media (max-width: 992px) {
+    .products-layout {
+        grid-template-columns: 1fr; /* Sidopanel staplas ovanpå */
+    }
+    .sidebar {
+        order: -1; /* Flyttar sidopanelen ovanför produkterna på små skärmar */
+    }
+}
+/* ... (befintliga stilar) ... */
+
+/* Product Detail Page Styles */
+.product-detail-layout {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.product-detail-section {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-wrap: wrap; /* För responsivitet */
+    gap: 40px;
+    padding: 30px;
+    max-width: 900px; /* Begränsa bredden för detaljsidan */
+}
+
+.product-image-container {
+    flex: 1 1 400px; /* Flexibel bredd, minst 400px */
+    text-align: center;
+}
+
+.product-image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-info-container {
+    flex: 1 1 400px; /* Flexibel bredd, minst 400px */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-info-container h1 {
+    font-size: 2.8rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.product-detail-price {
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.product-detail-tags {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.product-tag {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s ease;
+}
+
+.product-tag:hover {
+    background-color: var(--hover-color);
+    text-decoration: none;
+}
+
+.product-detail-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    flex-grow: 1; /* Fyller utrymme */
+}
+
+#product-detail-add-to-cart {
+    width: auto; /* Återställ bredden */
+    align-self: flex-start; /* Placera knappen till vänster */
+}
+
+/* Products Page Sidebar Adjustments */
+.sidebar ul li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.sidebar ul li:hover {
+    color: var(--primary-color);
+}
+
+.sidebar ul li.active, .sidebar ul li.active-sort {
+    color: var(--secondary-color); /* Färg för aktivt filter/sortering */
+    font-weight: bold;
+}
+
+
+/* Responsivitet för produktdetaljsidan */
+@media (max-width: 768px) {
+    .product-detail-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .product-image-container, .product-info-container {
+        flex: 1 1 auto;
+    }
+    #product-detail-add-to-cart {
+        width: 100%; /* Knapp tar full bredd på mobil */
+    }
+}
+/* ... (befintliga stilar) ... */
+
+/* --- Login Popup Styles --- */
+.login-popup {
+    display: none; /* Dold som standard */
+    position: absolute; /* Positioneras relativt till närmaste positionerade förälder (body/header) */
+    top: 100%; /* Placera under headern */
+    right: 20px; /* Justera positionen, t.ex. till höger */
+    z-index: 1000; /* Se till att den ligger över annat innehåll */
+    background-color: var(--card-bg); /* Samma bakgrund som produktkort */
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    padding: 25px 30px;
+    width: 300px; /* Fast bredd för popupen */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px); /* Lätt uppåtgående animation */
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.login-popup.show {
+    display: block; /* Visa popup */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.login-popup-content h3 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.login-popup-content .form-group {
+    margin-bottom: 15px;
+}
+
+.login-popup-content label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.login-popup-content input[type="text"],
+.login-popup-content input[type="password"] {
+    width: calc(100% - 20px); /* Full bredd minus padding */
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.login-popup-content input[type="text"]:focus,
+.login-popup-content input[type="password"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2);
+}
+
+.login-popup-content .primary-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    margin-top: 20px;
+}
+
+.login-popup-content p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.login-popup-content .register-link {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-popup-content .register-link:hover {
+    text-decoration: underline;
+}
+
+.login-popup .close-popup-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--text-color-light);
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.login-popup .close-popup-btn:hover {
+    color: var(--primary-color);
+}
+
+/* Base styles for form pages (login.html, register.html) */
+.form-page {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.form-page h1 {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
+.auth-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="password"],
+.auth-form input[type="email"] { /* Lägg till email om du planerar det */
+    width: calc(100% - 24px); /* Justera för padding och border */
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.auth-form input[type="text"]:focus,
+.auth-form input[type="password"]:focus,
+.auth-form input[type="email"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.3);
+}
+
+.auth-form .primary-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    margin-top: 25px;
+}
+
+.form-page p {
+    margin-top: 25px;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.form-page p a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.form-page p a:hover {
+    text-decoration: underline;
+}
+
+/* Responsivitet för popup */
+@media (max-width: 600px) {
+    .login-popup {
+        width: 90%; /* Bättre bredd på små skärmar */
+        left: 5%; /* Centrera horisontellt */
+        right: 5%;
+    }
+}
