@@ -74,26 +74,37 @@ a:hover {
 
 /* Header - Anpassad till Wireframe */
 header {
-    /* Lägg till/ändra dessa rader: */
-    position: fixed; /* Låser headern till webbläsarfönstret */
-    top: 0;          /* Placerar den högst upp */
-    left: 0;         /* Placerar den längst till vänster */
-    width: 100%;     /* Får den att sträcka sig över hela bredden */
-    z-index: 1000;   /* Se till att den ligger över annat innehåll när man skrollar */
+    /* Grundläggande stilar för din header (som den såg ut innan position: fixed) */
+    background-color: var(--header-bg); /* Anta att du har en variabel för detta */
+    padding: 20px 0; /* Din befintliga padding */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Liten skugga */
+    width: 100%;
+    z-index: 1000; /* Viktigt för att den ska ligga över annat innehåll när den väl blir fixed */
 
-    /* Dina befintliga stilar för headern: */
-    background-color: var(--header-bg); /* Antar att du har en variabel för detta */
-    padding: 20px 0; /* Justera padding efter behov */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Valfritt: ger en liten skugga */
-    /* ... andra befintliga stilar för headern ... */
+    /* Transition för en mjukare effekt när den blir fixed */
+    transition: all 0.3s ease-in-out;
+
+    /* VIKTIGT: Ingen position: fixed; HÄR initialt */
+    position: relative; /* Standardbeteende, eller ta bort denna rad om du inte har en specifik position */
+    top: 0; /* Se till att den ligger överst initialt */
+}
+header.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Du kan ändra stilar här om du vill att headern ska se annorlunda ut när den är fixed */
+    /* t.ex. mer kompakt, annan bakgrundsfärg */
+    background-color: var(--header-bg-fixed, #1a1a1a); /* Lätt mörkare om du vill */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .header-grid {
-    display: grid;
-    grid-template-columns: auto 1fr auto; /* Logga, sökfält, användar-actions */
-    gap: 20px;
     align-items: center;
-    flex-wrap: wrap; /* För responsivitet */
+    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* Justera detta om du har en annan layout */
+    gap: 20px; /* Mellanrum mellan elementen */
 }
 
 .header-logo {
@@ -105,6 +116,7 @@ header {
 
 .header-search {
     display: flex;
+    margin-left: auto; /* Trycker den åt höger om du har en logo till vänster */
     gap: 5px;
 }
 
@@ -128,7 +140,8 @@ header {
 
 .header-user-actions {
     display: flex;
-    gap: 10px;
+    gap: 15px; /* Mellanrum mellan knapparna */
+    align-items: center;
 }
 
 /* Main Content - Anpassad till Wireframe */
@@ -141,6 +154,7 @@ main {
     margin-top: 20px;
     flex-direction: column; /* Staplar sektionerna vertikalt */
     gap: 40px; /* Mellanrum mellan sektionerna */
+    padding-top: 40px; /* Exempel, justera detta värde */
 }
 
 .product-section {

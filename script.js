@@ -328,3 +328,91 @@ document.addEventListener('DOMContentLoaded', () => {
         renderWishlistPage();
     }
 });
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ... (Global Sökfunktionalitet, Varukorgs- och Önskelista-logik, renderGameCard etc. - oförändrat) ...
+
+    // --- Sticky Header Logik ---
+    const header = document.querySelector('header');
+    let headerHeight = header.offsetHeight; // Få headerns höjd (inkl. padding/border)
+
+    // Det element som behöver padding-top när headern blir fixed
+    // Det kan vara body, main, eller en specifik wrapper-div
+    // I detta exempel använder vi body
+    const contentToPushDown = document.body; // Eller document.querySelector('main') om du föredrar
+
+    function handleStickyHeader() {
+        // Kontrollera om sidan har skrollats ner mer än headerns höjd
+        if (window.scrollY > headerHeight) {
+            header.classList.add('fixed');
+            // Lägg till padding på innehållet för att undvika hopp
+            // VIKTIGT: Lägg till det värde som motsvarar din headers höjd
+            contentToPushDown.style.paddingTop = `${headerHeight}px`;
+        } else {
+            header.classList.remove('fixed');
+            // Ta bort padding när headern inte är fixed
+            contentToPushDown.style.paddingTop = '0'; // Eller din initiala padding-top om den finns
+        }
+    }
+
+    // Lägg till händelselyssnare för scroll-händelsen
+    window.addEventListener('scroll', handleStickyHeader);
+
+    // Kalla funktionen en gång vid laddning om sidan redan är skrollad (t.ex. vid refresh)
+    handleStickyHeader();
+
+    // Uppdatera headerhöjden om fönsterstorleken ändras (viktigt för responsivitet)
+    window.addEventListener('resize', () => {
+        headerHeight = header.offsetHeight;
+        handleStickyHeader(); // Justera padding om headern redan är fixed
+    });
+
+
+    // --- Användarnamn i headern efter inloggning (oförändrad från förra lösningen) ---
+    const loggedInUser = localStorage.getItem('loggedInUser');
+    const userActionsDiv = document.getElementById('header-user-actions');
+    const loginLink = document.getElementById('login-link');
+
+    if (loggedInUser && userActionsDiv) {
+        if (loginLink) {
+            loginLink.remove();
+        }
+
+        const userNameSpan = document.createElement('span');
+        userNameSpan.textContent = `Välkommen, ${loggedInUser}!`;
+        userNameSpan.style.color = 'var(--primary-color)';
+        userNameSpan.style.fontWeight = 'bold';
+
+        const logoutBtn = document.createElement('button');
+        logoutBtn.textContent = 'Logga Ut';
+        logoutBtn.classList.add('btn');
+        logoutBtn.classList.add('primary-btn');
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('loggedInUser');
+            localStorage.removeItem('cart');
+            localStorage.removeItem('wishlist');
+            window.location.reload();
+        });
+
+        const cartButton = userActionsDiv.querySelector('.cart-btn');
+        const wishlistButton = userActionsDiv.querySelector('.wishlist-btn');
+        if (wishlistButton) {
+            userActionsDiv.insertBefore(userNameSpan, wishlistButton);
+            userActionsDiv.insertBefore(logoutBtn, wishlistButton);
+        } else if (cartButton) {
+            userActionsDiv.insertBefore(userNameSpan, cartButton);
+            userActionsDiv.insertBefore(logoutBtn, cartButton);
+        }
+    }
+
+    // Initial uppdatering av räknare
+    updateCounts();
+
+    // Rendera innehållet på sidorna om vi är på dem
+    if (document.getElementById('cart-items')) {
+        renderCartPage();
+    }
+    if (document.getElementById('wishlist-items')) {
+        renderWishlistPage();
+    }
+});
