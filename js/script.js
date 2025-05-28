@@ -63,10 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const addToCartBtn = document.getElementById('product-detail-add-to-cart');
                 if (addToCartBtn) {
                     addToCartBtn.textContent = 'I varukorgen';
-                    addToCartBtn.disabled = true;
+                    addToCartBtn.disabled = true; // Om något ligger i varukorg, tryck inte mer
                 }
             }
-            // NY: Uppdatera knapparna på andra sidor (index/products) om de är synliga
+            // Uppdatera knapparna på andra sidor (index/products) om de är synliga
             const allBuyButtons = document.querySelectorAll(`[data-product-id="${productId}"].add-to-cart-btn`);
             allBuyButtons.forEach(btn => {
                 btn.textContent = 'I varukorgen';
@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof renderCartPage === 'function') renderCartPage();
     };
 
-    // changeCartQuantity tas bort eftersom vi inte hanterar kvantiteter i varukorgen längre
     // window.changeCartQuantity = (productId, change) => { ... };
 
     window.addToWishlist = (productId) => {
@@ -126,8 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof renderWishlistPage === 'function') renderWishlistPage();
     };
 
-    // --- Funktion för att lägga till spel i användarens bibliotek (UPPDATERAD) ---
-    // Tar nu emot en array av game IDs, inte varukorgsobjekt
+    // --- Funktion för att lägga till spel i användarens bibliotek ---
+    // Tar emot en array av game IDs
     window.addToOwnedGames = (gameIds) => {
         const loggedInUser = localStorage.getItem('loggedInUser');
         if (!loggedInUser) {
@@ -164,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // --- Funktion för att rendera ett spelkort (UPPDATERAD) ---
+    // --- Funktion för att rendera ett spelkort ---
     window.renderGameCard = function(game, options = {}) {
         const article = document.createElement('article');
         article.classList.add('product-card');

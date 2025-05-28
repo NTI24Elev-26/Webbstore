@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Enkel validering
             if (identifier === '' || password === '') {
-                alert('Vänligen fyll i både användarnamn/e-post och lösenord.');
+                alert('Vänligen fyll i både användarnamn/e-post och lösenord.'); 4
                 return;
             }
 
