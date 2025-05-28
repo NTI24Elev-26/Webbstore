@@ -1,9 +1,9 @@
 //Data för de olika spel som visas
 const games = [
     {
-        id: '2187-dystopia',
+        id: '2187-cyberpunk',
         name: '2187: The last ronin',
-        image: 'images/cyber-ronin.jpg',
+        image: 'images/cyber-ronin.png',
         price: 299,
         description: 'Ett cyberpunk-äventyr där du spelar som en ensam ronin i en framtida megastad. Snabb action och djup berättelse. Utforska neonskyltade gator, undvik megakorporationer och avslöja sanningen bakom den totalitära regimen.',
         tags: ['Action', 'RPG', 'Cyberpunk', 'Singleplayer', 'FPS']
