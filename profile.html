@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Önskelista</title>
+    <title>Min Profil</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -26,13 +26,31 @@
 </header>
 
 <main class="container page-content">
-    <h1>Min Önskelista</h1>
-    <div class="empty-message" id="wishlist-empty-message" style="display: none;">
-        <p>Din önskelista är tom. Lägg till spel du drömmer om!</p>
-        <a href="products.html" class="btn primary-btn">Utforska spel</a>
-    </div>
-    <div class="product-list-container" id="wishlist-items">
-    </div>
+    <h1>Min Profil</h1>
+
+    <aside class="profile-sidebar profile-nav-inline">
+        <ul>
+            <li><button id="show-personal-info" class="btn secondary-btn profile-nav-btn active">Personlig Information</button></li>
+            <li><button id="show-game-library" class="btn secondary-btn profile-nav-btn">Spelbibliotek</button></li>
+        </ul>
+    </aside>
+
+    <section class="profile-main-content">
+        <div id="personal-info-section" class="profile-section active">
+            <h2>Personlig Information</h2>
+            <p><strong>Användarnamn:</strong> <span id="profile-username"></span></p>
+            <p><strong>E-post:</strong> <span id="profile-email"></span></p>
+            <p><strong>Lösenord:</strong> <span id="profile-password-display">••••••••</span>
+                <button id="show-password-btn" class="btn secondary-btn small-btn">Visa Lösenord</button></p>
+        </div>
+
+        <div id="game-library-section" class="profile-section" style="display: none;">
+            <h2>Mitt Spelbibliotek</h2>
+            <div class="product-grid" id="owned-games-grid">
+                <p class="info-message" id="no-owned-games-message" style="display: none;">Du äger inga spel ännu.</p>
+            </div>
+        </div>
+    </section>
 </main>
 
 <footer>
@@ -66,6 +84,22 @@
     </div>
 </footer>
 
+<div id="password-confirm-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Bekräfta ditt lösenord</h2>
+        <p>Ange ditt GameCompany-lösenord för att visa din personliga information.</p>
+        <div class="form-group">
+            <label for="modal-password">Lösenord:</label>
+            <input type="password" id="modal-password" required>
+        </div>
+        <button id="confirm-password-btn" class="btn primary-btn">Bekräfta</button>
+        <p id="modal-error-message" style="color: red; margin-top: 10px; display: none;">Felaktigt lösenord.</p>
+    </div>
+</div>
+
 <script src="data.js"></script>
-<script src="script.js"></script> </body>
+<script src="script.js"></script>
+<script src="profile.js"></script>
+</body>
 </html>

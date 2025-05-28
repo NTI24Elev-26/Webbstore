@@ -27,77 +27,121 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Varukorgs- och Önskelista-logik (oförändrad, men se till att `renderCartPage` och `renderWishlistPage`
-    // anropas bara om elementen finns på sidan, vilket de redan gör med `if (!container) return;`) ---
+    // --- Varukorgs- och Önskelista-logik ---
     const cartCountSpan = document.getElementById('cart-count');
     const wishlistCountSpan = document.getElementById('wishlist-count');
 
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+    // Varukorgen lagrar nu bara en lista med unika ID:n, inte objekt med kvantitet
+    let cart = JSON.parse(localStorage.getItem('cart')) || []; // Förväntas vara [id1, id2]
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || []; // Förväntas vara [id1, id2]
 
     function updateCounts() {
         if (cartCountSpan) {
-            cartCountSpan.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCountSpan.textContent = cart.length; // Räknar unika spel
         }
         if (wishlistCountSpan) {
             wishlistCountSpan.textContent = wishlist.length;
         }
     }
 
-    window.addToCart = (productId) => { /* ... (Din befintliga addToCart-logik) ... */
-        const existingItem = cart.find(item => item.id === productId);
-        if (existingItem) {
-            existingItem.quantity++;
-        } else {
-            cart.push({ id: productId, quantity: 1 });
-        }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCounts();
-        alert(`"${games.find(g => g.id === productId).name}" har lagts till i varukorgen!`);
-        if (typeof renderCartPage === 'function') renderCartPage();
-    };
-
-    window.removeFromCart = (productId) => { /* ... (Din befintliga removeFromCart-logik) ... */
-        cart = cart.filter(item => item.id !== productId);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        updateCounts();
-        if (typeof renderCartPage === 'function') renderCartPage();
-    };
-
-    window.changeCartQuantity = (productId, change) => { /* ... (Din befintliga changeCartQuantity-logik) ... */
-        const item = cart.find(item => item.id === productId);
-        if (item) {
-            item.quantity += change;
-            if (item.quantity <= 0) {
-                window.removeFromCart(productId);
-            } else {
-                localStorage.setItem('cart', JSON.stringify(cart));
-                updateCounts();
-                if (typeof renderCartPage === 'function') renderCartPage();
+    window.addToCart = (productId) => {
+        if (!cart.includes(productId)) { // Kontrollera om spelet redan finns i varukorgen
+            cart.push(productId);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCounts();
+            alert(`"${games.find(g => g.id === productId).name}" har lagts till i varukorgen!`);
+            // Uppdatera produktsidan om funktionen finns där
+            if (typeof renderCartPage === 'function') renderCartPage();
+            // Uppdatera knappen på produktdetaljsidan (om vi är där)
+            if (window.location.pathname.includes('product-detail.html')) {
+                // Enkel lösning för att tvinga uppdatering av knappen på detaljsidan
+                // Bättre att ha en specifik uppdateringsfunktion i product-detail.js
+                const addToCartBtn = document.getElementById('product-detail-add-to-cart');
+                if (addToCartBtn) {
+                    addToCartBtn.textContent = 'I varukorgen';
+                    addToCartBtn.disabled = true;
+                }
             }
+        } else {
+            alert('Denna produkt finns redan i varukorgen.');
         }
     };
 
-    window.addToWishlist = (productId) => { /* ... (Din befintliga addToWishlist-logik) ... */
+    window.removeFromCart = (productId) => {
+        cart = cart.filter(id => id !== productId);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCounts();
+        if (typeof renderCartPage === 'function') renderCartPage();
+    };
+
+    // changeCartQuantity tas bort eftersom vi inte hanterar kvantiteter i varukorgen längre
+    // window.changeCartQuantity = (productId, change) => { ... };
+
+    window.addToWishlist = (productId) => {
         if (!wishlist.includes(productId)) {
             wishlist.push(productId);
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
             updateCounts();
             alert(`"${games.find(g => g.id === productId).name}" har lagts till i önskelistan!`);
             if (typeof renderWishlistPage === 'function') renderWishlistPage();
+            // Uppdatera knappen på produktdetaljsidan
+            if (window.location.pathname.includes('product-detail.html')) {
+                const addToWishlistBtn = document.getElementById('product-detail-add-to-wishlist');
+                if (addToWishlistBtn) {
+                    addToWishlistBtn.style.display = 'none'; // Dölj den om den lagts till
+                }
+            }
         } else {
             alert('Denna produkt finns redan i önskelistan.');
         }
     };
 
-    window.removeFromWishlist = (productId) => { /* ... (Din befintliga removeFromWishlist-logik) ... */
+    window.removeFromWishlist = (productId) => {
         wishlist = wishlist.filter(id => id !== productId);
         localStorage.setItem('wishlist', JSON.stringify(wishlist));
         updateCounts();
         if (typeof renderWishlistPage === 'function') renderWishlistPage();
     };
 
-    // --- Funktion för att rendera ett spelkort (oförändrad) ---
+    // --- Funktion för att lägga till spel i användarens bibliotek (UPPDATERAD) ---
+    // Tar nu emot en array av game IDs, inte varukorgsobjekt
+    window.addToOwnedGames = (gameIds) => {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+            alert('Du måste vara inloggad för att lägga till spel i ditt bibliotek.');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const currentUserIndex = users.findIndex(u => u.username === loggedInUser);
+
+        if (currentUserIndex !== -1) {
+            const currentUser = users[currentUserIndex];
+            if (!currentUser.ownedGames) {
+                currentUser.ownedGames = []; // Initialisera som en array av ID:n
+            }
+
+            let gamesAddedCount = 0;
+            gameIds.forEach(gameId => {
+                if (!currentUser.ownedGames.includes(gameId)) { // Lägg bara till unika ID:n
+                    currentUser.ownedGames.push(gameId);
+                    gamesAddedCount++;
+                }
+            });
+
+            if (gamesAddedCount > 0) {
+                localStorage.setItem('users', JSON.stringify(users));
+                console.log(`${gamesAddedCount} spel har lagts till i biblioteket för ${loggedInUser}.`);
+            } else {
+                console.log('Inga nya spel lades till i biblioteket.');
+            }
+        } else {
+            console.error('Kunde inte hitta inloggad användare för att lägga till spel i biblioteket.');
+        }
+    };
+
+    // --- Funktion för att rendera ett spelkort (UPPDATERAD) ---
     window.renderGameCard = function(game, options = {}) {
         const article = document.createElement('article');
         article.classList.add('product-card');
@@ -125,11 +169,36 @@ document.addEventListener('DOMContentLoaded', () => {
         link.appendChild(price);
         article.appendChild(link);
 
+        // Kontrollera om spelet redan ägs av den inloggade användaren (UPPDATERAD FÖR UNIKA ID:N)
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        let userOwnsGame = false;
+        if (loggedInUser) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const currentUser = users.find(u => u.username === loggedInUser);
+            if (currentUser && currentUser.ownedGames && currentUser.ownedGames.includes(game.id)) {
+                userOwnsGame = true;
+            }
+        }
+        // Kontrollera om spelet finns i varukorgen
+        const isInCart = cart.includes(game.id);
+
+
         if (options.showAddToCart) {
             const buyButton = document.createElement('button');
             buyButton.classList.add('add-to-cart-btn', 'btn', 'primary-btn');
-            buyButton.textContent = 'Köp';
-            buyButton.onclick = () => window.addToCart(game.id);
+
+            if (userOwnsGame) {
+                buyButton.textContent = 'Ägs redan';
+                buyButton.disabled = true;
+            } else if (isInCart) {
+                buyButton.textContent = 'I varukorgen';
+                buyButton.disabled = true;
+            }
+            else {
+                buyButton.textContent = 'Köp';
+                buyButton.disabled = false;
+                buyButton.onclick = () => window.addToCart(game.id);
+            }
             article.appendChild(buyButton);
         }
 
@@ -138,9 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
             wishlistButton.classList.add('add-to-wishlist-btn', 'btn', 'secondary-btn');
             wishlistButton.textContent = 'Lägg till önskelista';
             wishlistButton.onclick = () => window.addToWishlist(game.id);
-            // Dölj om spelet redan finns i önskelistan
+            // Dölj om spelet redan finns i önskelistan eller om det ägs
             const currentWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-            if (currentWishlist.includes(game.id)) {
+            if (currentWishlist.includes(game.id) || userOwnsGame) {
                 wishlistButton.style.display = 'none';
             }
             article.appendChild(wishlistButton);
@@ -162,18 +231,25 @@ document.addEventListener('DOMContentLoaded', () => {
             article.appendChild(removeButton);
         }
 
+        // NY: showRemoveFromLibrary (för profilsidan)
+        if (options.showRemoveFromLibrary) {
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('remove-from-library-btn', 'btn');
+            removeButton.textContent = 'Ta bort från bibliotek';
+            removeButton.onclick = () => window.removeFromOwnedGames(game.id);
+            article.appendChild(removeButton);
+        }
+
+        // Kvantitetskontroller tas bort för varukorgen men kvar i renderGameCard (om det behövs för andra syften)
+        // I detta scenario med "bara en kopia", behövs de inte här.
+        // options.showQuantityControls och options.quantity är nu irrelevant för varukorgen/biblioteket.
+        // Om du har en annan sida där du vill visa kvantitet för ett kort, kan du behålla den här sektionen.
+        // För biblioteket kommer vi inte att visa det, bara att det "ägs".
         if (options.showQuantityControls && options.quantity !== undefined) {
             const quantityContainer = document.createElement('div');
             quantityContainer.classList.add('quantity-controls');
-            quantityContainer.innerHTML = `
-                <button class="quantity-btn decrease-quantity" data-id="${game.id}">-</button>
-                <span>Antal: ${options.quantity}</span>
-                <button class="quantity-btn increase-quantity" data-id="${game.id}">+</button>
-            `;
+            quantityContainer.innerHTML = `<span>Antal: ${options.quantity}</span>`;
             article.appendChild(quantityContainer);
-
-            quantityContainer.querySelector('.decrease-quantity').onclick = () => window.changeCartQuantity(game.id, -1);
-            quantityContainer.querySelector('.increase-quantity').onclick = () => window.changeCartQuantity(game.id, 1);
         }
 
         return article;
@@ -196,13 +272,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Rendera varukorgssidan (`cart.html`) ---
+    // --- Rendera varukorgssidan (`cart.html`) (UPPDATERAD) ---
     window.renderCartPage = function() {
         const cartItemsContainer = document.getElementById('cart-items');
         const cartSummaryDiv = document.getElementById('cart-summary');
         const cartTotalSpan = document.getElementById('cart-total');
         const cartEmptyMessage = document.getElementById('cart-empty-message');
         const clearCartBtn = document.querySelector('.clear-cart-btn');
+        const checkoutBtn = document.getElementById('checkout-btn');
 
         if (!cartItemsContainer) return;
 
@@ -212,31 +289,73 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cart.length === 0) {
             cartEmptyMessage.style.display = 'block';
             cartSummaryDiv.style.display = 'none';
+            if (checkoutBtn) checkoutBtn.style.display = 'none';
         } else {
             cartEmptyMessage.style.display = 'none';
             cartSummaryDiv.style.display = 'block';
+            if (checkoutBtn) checkoutBtn.style.display = 'block';
 
-            cart.forEach(item => {
-                const game = games.find(g => g.id === item.id);
+            cart.forEach(gameId => { // Loopar nu igenom bara ID:n
+                const game = games.find(g => g.id === gameId);
                 if (game) {
                     const card = renderGameCard(game, {
                         showRemoveFromCart: true,
-                        showQuantityControls: true,
-                        quantity: item.quantity
+                        // Kvantitetskontroller och redigerbarhet tas bort här
+                        showAddToCart: false,
+                        showAddToWishlist: false
                     });
 
                     const itemPrice = document.createElement('span');
                     itemPrice.classList.add('item-price');
-                    itemPrice.textContent = `Totalt: ${game.price * item.quantity} SEK`;
+                    itemPrice.textContent = `Pris: ${game.price} SEK`; // Nu bara enhetspris
                     card.querySelector('a').appendChild(itemPrice);
 
                     cartItemsContainer.appendChild(card);
-                    totalSum += game.price * item.quantity;
+                    totalSum += game.price; // Summerar bara enhetspriserna
                 }
             });
             cartTotalSpan.textContent = `${totalSum} SEK`;
         }
     };
+    const header = document.querySelector('header');
+
+    let headerHeight = header.offsetHeight;
+
+    const contentToPushDown = document.body;
+
+
+
+    function handleStickyHeader() {
+
+        if (window.scrollY > headerHeight) {
+
+            header.classList.add('fixed');
+
+            contentToPushDown.style.paddingTop = `${headerHeight}px`;
+
+        } else {
+
+            header.classList.remove('fixed');
+
+            contentToPushDown.style.paddingTop = '0';
+
+        }
+
+    }
+
+
+
+    window.addEventListener('scroll', handleStickyHeader);
+
+    handleStickyHeader();
+
+    window.addEventListener('resize', () => {
+
+        headerHeight = header.offsetHeight;
+
+        handleStickyHeader();
+
+    })
 
     if (document.getElementById('cart-items') && document.querySelector('.clear-cart-btn')) {
         document.querySelector('.clear-cart-btn').addEventListener('click', () => {
@@ -247,9 +366,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderCartPage();
             }
         });
+
+        const checkoutBtn = document.getElementById('checkout-btn');
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => {
+                const loggedInUser = localStorage.getItem('loggedInUser');
+                if (!loggedInUser) {
+                    alert('Du måste vara inloggad för att slutföra köpet.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                if (cart.length === 0) {
+                    alert('Din varukorg är tom!');
+                    return;
+                }
+
+                if (confirm('Vill du slutföra ditt köp?')) {
+                    // Skicka bara en lista med ID:n
+                    window.addToOwnedGames(cart);
+
+                    cart = []; // Töm varukorgen efter köp
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    updateCounts();
+                    renderCartPage();
+
+                    alert('Ditt köp har slutförts! Spelen finns nu i ditt bibliotek.');
+                    window.location.href = 'profile.html'; // Omdirigera till profilsidan
+                }
+            });
+        }
     }
 
-    // --- Rendera önskelistan (`wishlist.html`) ---
+
+    // --- Rendera önskelistan (`wishlist.html`) (oförändrad, fungerar redan med ID-lista) ---
     window.renderWishlistPage = function() {
         const wishlistItemsContainer = document.getElementById('wishlist-items');
         const wishlistEmptyMessage = document.getElementById('wishlist-empty-message');
@@ -267,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const game = games.find(g => g.id === gameId);
                 if (game) {
                     wishlistItemsContainer.appendChild(renderGameCard(game, {
-                        showAddToCart: true,
+                        showAddToCart: true, // Fortsätt visa köp-knapp i önskelistan
                         showRemoveFromWishlist: true
                     }));
                 }
@@ -276,112 +426,24 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // --- Användarnamn i headern efter inloggning (UPPDATERAD LOGIK) ---
+    // --- Användarstatus och Inloggning/Utloggning (oförändrad) ---
     const loggedInUser = localStorage.getItem('loggedInUser');
     const userActionsDiv = document.getElementById('header-user-actions');
-    const loginLink = document.getElementById('login-link'); // Den vanliga login-länken
+    const authStatusElement = document.getElementById('auth-status');
 
-    if (loggedInUser && userActionsDiv) {
-        // Om inloggad: ta bort "Logga In"-länken, lägg till "Välkommen" och "Logga Ut"
-        if (loginLink) {
-            loginLink.remove(); // Ta bort login-länken
-        }
+    if (loggedInUser && userActionsDiv && authStatusElement) {
+        const welcomeContainer = document.createElement('div');
+        welcomeContainer.classList.add('logged-in-status');
+        welcomeContainer.style.display = 'flex';
+        welcomeContainer.style.alignItems = 'center';
+        welcomeContainer.style.gap = '15px';
 
-        const userNameSpan = document.createElement('span');
-        userNameSpan.textContent = `Välkommen, ${loggedInUser}!`;
-        userNameSpan.style.color = 'var(--primary-color)';
-        userNameSpan.style.fontWeight = 'bold';
-
-        const logoutBtn = document.createElement('button');
-        logoutBtn.textContent = 'Logga Ut';
-        logoutBtn.classList.add('btn');
-        logoutBtn.classList.add('primary-btn');
-        logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('loggedInUser');
-            localStorage.removeItem('cart'); // Töm även varukorgen vid utloggning om önskat
-            localStorage.removeItem('wishlist'); // Töm även önskelistan vid utloggning
-            window.location.reload(); // Ladda om sidan för att uppdatera headern
-        });
-
-        // Hitta varukorgsknappen för att infoga före
-        const cartButton = userActionsDiv.querySelector('.cart-btn');
-        const wishlistButton = userActionsDiv.querySelector('.wishlist-btn');
-        if (wishlistButton) {
-            userActionsDiv.insertBefore(userNameSpan, wishlistButton);
-            userActionsDiv.insertBefore(logoutBtn, wishlistButton);
-        } else if (cartButton) {
-            userActionsDiv.insertBefore(userNameSpan, cartButton);
-            userActionsDiv.insertBefore(logoutBtn, cartButton);
-        }
-    }
-    // Om inte inloggad, behöver vi inte göra något här, login-länken kommer att finnas kvar som standard.
-
-
-    // Initial uppdatering av räknare
-    updateCounts();
-
-    // Rendera innehållet på sidorna om vi är på dem (använder de nu globala funktionerna)
-    if (document.getElementById('cart-items')) {
-        renderCartPage();
-    }
-    if (document.getElementById('wishlist-items')) {
-        renderWishlistPage();
-    }
-});
-document.addEventListener('DOMContentLoaded', () => {
-
-    // ... (Global Sökfunktionalitet, Varukorgs- och Önskelista-logik, renderGameCard etc. - oförändrat) ...
-
-    // --- Sticky Header Logik ---
-    const header = document.querySelector('header');
-    let headerHeight = header.offsetHeight; // Få headerns höjd (inkl. padding/border)
-
-    // Det element som behöver padding-top när headern blir fixed
-    // Det kan vara body, main, eller en specifik wrapper-div
-    // I detta exempel använder vi body
-    const contentToPushDown = document.body; // Eller document.querySelector('main') om du föredrar
-
-    function handleStickyHeader() {
-        // Kontrollera om sidan har skrollats ner mer än headerns höjd
-        if (window.scrollY > headerHeight) {
-            header.classList.add('fixed');
-            // Lägg till padding på innehållet för att undvika hopp
-            // VIKTIGT: Lägg till det värde som motsvarar din headers höjd
-            contentToPushDown.style.paddingTop = `${headerHeight}px`;
-        } else {
-            header.classList.remove('fixed');
-            // Ta bort padding när headern inte är fixed
-            contentToPushDown.style.paddingTop = '0'; // Eller din initiala padding-top om den finns
-        }
-    }
-
-    // Lägg till händelselyssnare för scroll-händelsen
-    window.addEventListener('scroll', handleStickyHeader);
-
-    // Kalla funktionen en gång vid laddning om sidan redan är skrollad (t.ex. vid refresh)
-    handleStickyHeader();
-
-    // Uppdatera headerhöjden om fönsterstorleken ändras (viktigt för responsivitet)
-    window.addEventListener('resize', () => {
-        headerHeight = header.offsetHeight;
-        handleStickyHeader(); // Justera padding om headern redan är fixed
-    });
-
-
-    // --- Användarnamn i headern efter inloggning (oförändrad från förra lösningen) ---
-    const loggedInUser = localStorage.getItem('loggedInUser');
-    const userActionsDiv = document.getElementById('header-user-actions');
-    const loginLink = document.getElementById('login-link');
-
-    if (loggedInUser && userActionsDiv) {
-        if (loginLink) {
-            loginLink.remove();
-        }
-
-        const userNameSpan = document.createElement('span');
-        userNameSpan.textContent = `Välkommen, ${loggedInUser}!`;
-        userNameSpan.style.color = 'var(--primary-color)';
-        userNameSpan.style.fontWeight = 'bold';
+        const userNameLink = document.createElement('a');
+        userNameLink.href = 'profile.html';
+        userNameLink.textContent = `Välkommen, ${loggedInUser}!`;
+        userNameLink.style.color = 'var(--primary-color)';
+        userNameLink.style.fontWeight = 'bold';
+        userNameLink.classList.add('profile-link');
 
         const logoutBtn = document.createElement('button');
         logoutBtn.textContent = 'Logga Ut';
@@ -394,25 +456,21 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.reload();
         });
 
-        const cartButton = userActionsDiv.querySelector('.cart-btn');
-        const wishlistButton = userActionsDiv.querySelector('.wishlist-btn');
-        if (wishlistButton) {
-            userActionsDiv.insertBefore(userNameSpan, wishlistButton);
-            userActionsDiv.insertBefore(logoutBtn, wishlistButton);
-        } else if (cartButton) {
-            userActionsDiv.insertBefore(userNameSpan, cartButton);
-            userActionsDiv.insertBefore(logoutBtn, cartButton);
-        }
+        welcomeContainer.appendChild(userNameLink);
+        welcomeContainer.appendChild(logoutBtn);
+
+        userActionsDiv.replaceChild(welcomeContainer, authStatusElement);
+
     }
 
-    // Initial uppdatering av räknare
     updateCounts();
 
-    // Rendera innehållet på sidorna om vi är på dem
     if (document.getElementById('cart-items')) {
         renderCartPage();
     }
     if (document.getElementById('wishlist-items')) {
         renderWishlistPage();
     }
+
 });
+// (Sticky Header Logik kan vara kvar som den är.)

@@ -109,6 +109,7 @@ header.fixed {
 
 .header-logo {
     font-size: 1.8rem;
+    font-family: 'Oxanium', cursive;
     font-weight: bold;
     color: var(--text-color);
     text-decoration: none;
@@ -251,39 +252,61 @@ footer {
     border-top: 1px solid var(--border-color);
 }
 
+/* In style.css */
+
 .footer-grid {
     display: grid;
-    grid-template-columns: auto 1fr auto; /* Logga, information, heading */
-    gap: 20px;
-    align-items: center;
+    /* Adjust this to fit your desired layout */
+    grid-template-columns: repeat(4, 1fr); /* Example: 4 equal columns */
+    gap: 20px; /* Space between grid items */
+    padding: 20px 0;
+    justify-items: start; /* Align content to the start of each grid cell */
 }
 
-.footer-logo, .footer-info, .footer-heading {
-    color: var(--text-color);
+.footer-logo {
+    font-size: 1.8rem;
+    font-family: 'Oxanium', cursive;
     font-weight: bold;
-    /* Placering enligt wireframe, text är enkel platshållare */
+    color: var(--primary-color);
+    text-decoration: none;
 }
 
-/* Responsivitet för mindre skärmar */
-@media (max-width: 768px) {
-    .header-grid {
-        grid-template-columns: 1fr; /* Stacka elementen */
-        justify-items: center; /* Centrera dem */
-    }
-    .header-search {
-        width: 100%; /* Sökfältet tar hela bredden */
-    }
-    .header-user-actions {
-        width: 100%;
-        justify-content: center;
-    }
-    .product-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Färre kolumner på små skärmar */
-    }
-    .footer-grid {
-        grid-template-columns: 1fr; /* Stacka footer-elementen */
-        justify-items: center;
-    }
+.footer-info,
+.footer-faq,
+.footer-heading {
+    /* Basic styling for these sections */
+    grid-column: span 1; /* Each spans 1 column */
+}
+
+.footer-info p,
+.footer-faq h3,
+.footer-heading p {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--text-color-light); /* Or adjust as per your theme */
+}
+
+.footer-info ul,
+.footer-faq ul,
+.footer-heading ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-info ul li a,
+.footer-faq ul li a,
+.footer-heading ul li a {
+    color: var(--text-color-light-alt); /* Lighter text for links */
+    text-decoration: none;
+    line-height: 1.8;
+    display: block; /* Make the whole list item clickable */
+}
+
+.footer-info ul li a:hover,
+.footer-faq ul li a:hover,
+.footer-heading ul li a:hover {
+    text-decoration: underline;
 }
 /* Layout för produkter med sidopanel */
 .products-layout {
@@ -658,4 +681,329 @@ footer {
         left: 5%; /* Centrera horisontellt */
         right: 5%;
     }
+}
+/* style.css */
+
+/* ... dina befintliga stilar ... */
+
+.product-detail-page .product-actions {
+    margin-top: 30px; /* Ge lite utrymme under pris/beskrivning */
+    display: flex; /* För att centrera eller organisera knapparna/meddelandet */
+    flex-direction: column; /* Stacker elementen vertikalt */
+    gap: 15px; /* Mellanrum mellan knapp/meddelande */
+    align-items: flex-start; /* Justera alignment */
+}
+
+.product-detail-page .product-actions .login-prompt-message {
+    font-size: 1.1em;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%; /* Gör att den sträcker sig över hela bredden om den är ensam */
+}
+
+.product-detail-page .product-actions .login-prompt-message a {
+    color: var(--secondary-color); /* Eller någon annan länkfärg */
+    text-decoration: underline;
+    font-weight: bold;
+}
+/* style.css */
+
+/* ... (befintliga stilar) ... */
+
+/* Profile Page Layout - UPDATED */
+/* Ta bort grid-layouten från .profile-layout */
+.profile-layout {
+    /* display: grid; */ /* Ta bort denna */
+    /* grid-template-columns: 1fr; */ /* Ta bort denna */
+    gap: 40px; /* Behåll gapet mellan sektionerna */
+    padding-top: 40px;
+}
+
+/* Du kan ta bort detta media query om du inte har någon annan grid-layout på profilsidan */
+/* @media (min-width: 768px) {
+    .profile-layout {
+        grid-template-columns: 250px 1fr;
+    }
+} */
+
+
+.profile-sidebar {
+    background-color: var(--card-bg); /* Behåll bakgrund/padding för att rama in knapparna */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px; /* Lägg till mellanrum under menyn */
+}
+
+/* Ny stil för att göra profilmenyn inline (horisontell) */
+.profile-nav-inline ul {
+    display: flex; /* Gör listan flexibel */
+    flex-wrap: wrap; /* Tillåter radbrytning på små skärmar */
+    gap: 15px; /* Mellanrum mellan knapparna */
+    justify-content: center; /* Centrera knapparna horisontellt */
+    margin-bottom: 0; /* Tar bort extra utrymme från listan */
+}
+
+.profile-nav-inline ul li {
+    margin-bottom: 0; /* Tar bort extra mellanrum mellan listelementen */
+}
+
+.profile-sidebar h3 {
+    /* Denna kan tas bort om du inte längre vill ha rubriken "Profilmeny" */
+    /* Eller centrera den om den ska vara kvar */
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+
+.profile-sidebar .profile-nav-btn {
+    /* Justera bredden för att passa innehållet bättre */
+    width: auto;
+    min-width: 150px; /* Ge knapparna en minsta bredd */
+    text-align: center; /* Centrera texten i knapparna */
+    padding: 12px 20px; /* Lite mer padding för större klickyta */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.profile-sidebar .profile-nav-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.profile-sidebar .profile-nav-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    font-weight: bold;
+}
+
+.profile-main-content {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-section h2 {
+    font-size: 2.2rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+}
+
+.profile-section p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.profile-section p strong {
+    color: var(--secondary-color);
+}
+
+/* Specific for game library grid within profile */
+#owned-games-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.info-message {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 123, 255, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    color: var(--primary-color);
+    margin-top: 20px;
+}
+
+/* Responsivitet för knapparna */
+@media (max-width: 600px) {
+    .profile-nav-inline ul {
+        flex-direction: column; /* Stapla knapparna vertikalt på små skärmar */
+        align-items: center; /* Centrera dem */
+    }
+    .profile-sidebar .profile-nav-btn {
+        width: 80%; /* Knapparna kan ta mer bredd */
+    }
+}
+/* style.css */
+
+/* ... (befintliga stilar) ... */
+
+/* Modal Styles */
+.modal {
+    display: none; /* Dold som standard */
+    position: fixed; /* Stannar på plats även vid scroll */
+    z-index: 1001; /* Ligger över allt annat */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Aktiverar scroll om innehållet är för stort */
+    background-color: rgba(0,0,0,0.7); /* Mörk bakgrund med transparens */
+    padding-top: 60px; /* Lite utrymme upptill */
+}
+
+.modal-content {
+    background-color: var(--card-bg);
+    margin: 5% auto; /* 5% från toppen och centrerad horisontellt */
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 80%; /* Bredden på modalen */
+    max-width: 450px; /* Maxbredd för större skärmar */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative; /* För att positionera stängningsknappen */
+    text-align: center;
+    color: var(--text-color);
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+.modal-content .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.modal-content input[type="password"] {
+    width: calc(100% - 24px); /* Full bredd minus padding */
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+.modal-content input[type="password"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.3); /* Kom ihåg att definiera --primary-rgb */
+}
+
+.modal-content .primary-btn {
+    width: auto;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+}
+
+.close-button {
+    color: var(--text-color);
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* Stil för den lilla knappen "Visa Lösenord" */
+.small-btn {
+    padding: 5px 10px;
+    font-size: 0.9em;
+    margin-left: 10px; /* Mellanrum från lösenords-texten */
+}
+/* style.css (exempel för FAQ-specifik styling) */
+
+.faq-page {
+    padding: 40px 0;
+}
+
+.faq-page h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+}
+
+.faq-navigation {
+    background-color: var(--card-bg-color);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.faq-navigation h2 {
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--text-color-light);
+}
+
+.faq-navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Eller flex-direction: column; för en vertikal lista */
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.faq-navigation li a {
+    display: block;
+    padding: 8px 15px;
+    background-color: var(--secondary-color);
+    color: var(--text-color-dark);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.faq-navigation li a:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color-light);
+}
+
+.faq-section {
+    background-color: var(--card-bg-color);
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.faq-section h2 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+}
+
+.faq-item h3 {
+    color: var(--text-color-light);
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.faq-item p {
+    color: var(--text-color-light-alt);
+    line-height: 1.6;
 }

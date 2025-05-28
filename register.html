@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameCompany - Registrera Dig</title>
+    <title>Registrera Dig</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -11,7 +11,7 @@
 <header>
     <div class="container header-grid">
         <div class="header-logo">
-            <a href="index.html">Logga</a>
+            <a href="index.html">Gamersportal</a>
         </div>
         <div class="header-search">
             <input type="search" id="header-search-input" placeholder="Sök spel...">
@@ -19,7 +19,7 @@
         </div>
         <div class="header-user-actions" id="header-user-actions">
             <a href="wishlist.html" class="btn wishlist-btn">Önskelista (<span id="wishlist-count">0</span>)</a>
-            <a href="login.html" class="btn login-btn" id="login-link">Logga In</a>
+            <a href="login.html" class="btn login-btn" id="auth-status">Logga In</a>
             <a href="cart.html" class="btn cart-btn">Varukorg (<span id="cart-count">0</span>)</a>
         </div>
     </div>
@@ -28,8 +28,12 @@
     <h1>Registrera Dig</h1>
     <form id="register-form" class="auth-form">
         <div class="form-group">
-            <label for="reg-username">Välj Användarnamn:</label>
+            <label for="reg-username">Användarnamn:</label>
             <input type="text" id="reg-username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="reg-email">E-post:</label>
+            <input type="email" id="reg-email" name="email" required>
         </div>
         <div class="form-group">
             <label for="reg-password">Välj Lösenord:</label>
@@ -46,17 +50,37 @@
 
 <footer>
     <div class="container footer-grid">
-        <div class="footer-logo">Logga</div>
+        <div class="footer-logo">Gamersportal</div>
         <div class="footer-info">
             <p>Information</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=LhGqB69cXAE">Om Oss</a></li>
+                <li><a href="https://www.youtube.com/watch?v=MJdqCOG_wVQ">Kontakta Oss</a></li>
+                <li><a href="https://youtu.be/GDjjXw-ezDU?t=32">Sekretesspolicy</a></li>
+            </ul>
+        </div>
+        <div class="footer-faq">
+            <h3>Vanliga Frågor</h3>
+            <ul>
+                <li><a href="faq.html#konto">Mitt Konto</a></li>
+                <li><a href="faq.html#bestallning">Beställning & Leverans</a></li>
+                <li><a href="faq.html#retur">Returer & Återbetalningar</a></li>
+                <li><a href="faq.html#teknisk-support">Teknisk Support</a></li>
+            </ul>
         </div>
         <div class="footer-heading">
-            <p>Heading</p>
+            <p>Följ Oss</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Facebook</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Twitter</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Instagram</a></li>
+            </ul>
         </div>
     </div>
 </footer>
 
 <script src="data.js"></script>
+<script src="register.js"></script>
 <script src="script.js"></script>
-<script src="register.js"></script> </body>
+</body>
 </html>

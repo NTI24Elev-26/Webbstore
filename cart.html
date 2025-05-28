@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameCompany - Min Varukorg</title>
+    <title>Varukorg</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -11,7 +11,7 @@
 <header>
     <div class="container header-grid">
         <div class="header-logo">
-            <a href="index.html">Logga</a>
+            <a href="index.html">Gamersportal</a>
         </div>
         <div class="header-search">
             <input type="search" id="header-search-input" placeholder="Sök spel...">
@@ -26,29 +26,48 @@
 </header>
 
 <main class="container page-content">
-    <h1>Min Varukorg</h1>
-    <div class="empty-message" id="cart-empty-message" style="display: none;">
-        <p>Din varukorg är tom. Dags att fylla den med fantastiska spel!</p>
-        <a href="products.html" class="btn primary-btn">Gå till Butiken</a>
+    <h1>Varukorgen</h1>
+
+    <div class="product-grid" id="cart-items">
+        <p class="info-message" id="cart-empty-message" style="display: none;">Din varukorg är tom.</p>
     </div>
-    <div class="product-list-container" id="cart-items">
-    </div>
+
     <div class="cart-summary" id="cart-summary" style="display: none;">
-        <p>Total summa: <span id="cart-total">0 SEK</span></p>
-        <button class="btn primary-btn checkout-btn">Gå till Kassan</button>
-        <button class="btn secondary-btn clear-cart-btn">Töm varukorg</button>
+        <h3>Varukorgssammanfattning</h3>
+        <p>Totalt: <span id="cart-total">0 SEK</span></p>
+        <button class="btn primary-btn checkout-btn" id="checkout-btn">Slutför Köp</button>
+        <button class="btn secondary-btn clear-cart-btn">Töm Varukorg</button>
     </div>
 </main>
 
 
 <footer>
     <div class="container footer-grid">
-        <div class="footer-logo">Logga</div>
+        <div class="footer-logo">Gamersportal</div>
         <div class="footer-info">
             <p>Information</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=LhGqB69cXAE">Om Oss</a></li>
+                <li><a href="https://www.youtube.com/watch?v=MJdqCOG_wVQ">Kontakta Oss</a></li>
+                <li><a href="https://youtu.be/GDjjXw-ezDU?t=32">Sekretesspolicy</a></li>
+            </ul>
+        </div>
+        <div class="footer-faq">
+            <h3>Vanliga Frågor</h3>
+            <ul>
+                <li><a href="faq.html#konto">Mitt Konto</a></li>
+                <li><a href="faq.html#bestallning">Beställning & Leverans</a></li>
+                <li><a href="faq.html#retur">Returer & Återbetalningar</a></li>
+                <li><a href="faq.html#teknisk-support">Teknisk Support</a></li>
+            </ul>
         </div>
         <div class="footer-heading">
-            <p>Heading</p>
+            <p>Följ Oss</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Facebook</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Twitter</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Instagram</a></li>
+            </ul>
         </div>
     </div>
 </footer>

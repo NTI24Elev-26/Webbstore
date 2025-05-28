@@ -1,27 +1,28 @@
+//Data för de olika spel som visas
 const games = [
     {
-        id: 'cyber-ronin',
-        name: 'Cyber Ronin: Neo Rebellion',
+        id: '2187-dystopia',
+        name: '2187: The last ronin',
         image: 'images/cyber-ronin.jpg',
         price: 299,
         description: 'Ett cyberpunk-äventyr där du spelar som en ensam ronin i en framtida megastad. Snabb action och djup berättelse. Utforska neonskyltade gator, undvik megakorporationer och avslöja sanningen bakom den totalitära regimen.',
         tags: ['Action', 'RPG', 'Cyberpunk', 'Singleplayer', 'FPS']
     },
     {
-        id: 'echoes-elysium',
-        name: 'Echoes of Elysium',
-        image: 'images/echoes-of-elysium.jpg',
+        id: 'avalon',
+        name: 'Avalon: rise of the phoenix',
+        image: 'images/avalon.jpg',
         price: 399,
         description: 'Ett episkt fantasy-rollspel med en öppen värld och hundratals timmars spel. Välj din väg och forma ödet i en värld fylld med magi, forntida ruiner och mäktiga drakar.',
         tags: ['RPG', 'Fantasy', 'Open World', 'Multiplayer', 'Adventure']
     },
     {
-        id: 'dungeon-drift',
-        name: 'Dungeon Drift',
+        id: 'dungeon-crawler',
+        name: 'Dungeon racer',
         image: 'images/dungeon-drift.jpg',
         price: 199,
-        description: 'En unik blandning av racing och dungeon crawler. Drifta genom dödliga fängelsehålor och besegra monster med din modifierade bil. Upplev pixelgrafik med modern spelmekanik.',
-        tags: ['Racing', 'Indie', 'Arcade', 'Dungeon Crawler', 'Pixel Art']
+        description: 'En unik blandning av racing och dungeon crawler. Drifta genom dödliga fängelsehålor och besegra monster tillsammans med vänner och din bil. Upplev pixelgrafik med modern spelmekanik.',
+        tags: ['Racing', 'Indie', 'Arcade', 'Dungeon Crawler', 'Pixel Art', 'Multiplayer']
     },
     {
         id: 'star-shapers',
@@ -50,7 +51,7 @@ const games = [
     {
         id: 'wild-west-shootout',
         name: 'Wild West Showdown',
-        image: 'images/wild-west-shootout.jpg', // Skapa denna bild
+        image: 'images/wild-west-shootout.jpg',
         price: 279,
         description: 'Upplev Vilda Västern som en laglös revolverman eller en tappra sheriff. Intensiva eldstrider, hästjakter och en öppen värld full av faror och äventyr.',
         tags: ['Action', 'Adventure', 'Western', 'Singleplayer', 'Open World']
@@ -58,7 +59,7 @@ const games = [
     {
         id: 'future-farms',
         name: 'Future Farms: Cyber Harvest',
-        image: 'images/future-farms.jpg', // Skapa denna bild
+        image: 'images/future-farms.jpg',
         price: 329,
         description: 'Bygg och hantera din egen futuristiska bondgård på en avlägsen planet. Odla genetiskt modifierade grödor, automatisera din produktion och försvara dig mot rymdpirater.',
         tags: ['Simulation', 'Strategy', 'Sci-Fi', 'Management']
@@ -66,7 +67,7 @@ const games = [
     {
         id: 'shadow-sleuth',
         name: 'Shadow Sleuth: Detective Noir',
-        image: 'images/shadow-sleuth.jpg', // Skapa denna bild
+        image: 'images/shadow-sleuth.jpg',
         price: 189,
         description: 'Kliv in i rollen som en hårdkokt detektiv i en mörk noir-stad. Lös brott, förhör vittnen och avslöja en korrupt konspiration i en värld utan moral.',
         tags: ['Adventure', 'Puzzle', 'Noir', 'Singleplayer', 'Story-driven']
@@ -74,7 +75,7 @@ const games = [
     {
         id: 'cosmic-craze',
         name: 'Cosmic Craze',
-        image: 'images/cosmic-craze.jpg', // Skapa denna bild
+        image: 'images/cosmic-craze.jpg',
         price: 129,
         description: 'Ett kaotiskt rymd-arkadspel där du styr ett litet rymdskepp och kämpar mot vågor av utomjordingar. Samla power-ups och slåss om highscores.',
         tags: ['Arcade', 'Sci-Fi', 'Action', 'Indie']
@@ -82,7 +83,7 @@ const games = [
     {
         id: 'ancient-legends',
         name: 'Ancient Legends: Forged in Fire',
-        image: 'images/ancient-legends.jpg', // Skapa denna bild
+        image: 'images/ancient-legends.jpg',
         price: 359,
         description: 'Ett massivt online-rollspel (MMORPG) inspirerat av forntida mytologier. Skapa din hjälte, utforska vidsträckta landskap och delta i episka strider med tusentals andra spelare.',
         tags: ['MMORPG', 'Fantasy', 'Multiplayer', 'Open World']
@@ -90,7 +91,7 @@ const games = [
     {
         id: 'robot-rampage',
         name: 'Robot Rampage: Mech Mayhem',
-        image: 'images/robot-rampage.jpg', // Skapa denna bild
+        image: 'images/robot-rampage.jpg',
         price: 269,
         description: 'Kontrollera gigantiska robotar i en stad förstörd av krig. Anpassa din mech, uppgradera dina vapen och förgör dina fiender i intensiva strider.',
         tags: ['Action', 'Mech', 'Fighting', 'Singleplayer', 'FPS']

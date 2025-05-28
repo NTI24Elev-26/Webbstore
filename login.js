@@ -6,32 +6,34 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.addEventListener('submit', (event) => {
             event.preventDefault();
 
-            const usernameInput = document.getElementById('username');
+            const identifierInput = document.getElementById('login-identifier'); // Nytt ID
             const passwordInput = document.getElementById('password');
 
-            const username = usernameInput.value.trim();
+            const identifier = identifierInput.value.trim(); // Kan vara användarnamn eller e-post
             const password = passwordInput.value;
 
             // Enkel validering
-            if (username === '' || password === '') {
-                alert('Vänligen fyll i både användarnamn och lösenord.');
+            if (identifier === '' || password === '') {
+                alert('Vänligen fyll i både användarnamn/e-post och lösenord.');
                 return;
             }
 
-            // Hämta registrerade användare
             const users = JSON.parse(localStorage.getItem('users')) || [];
 
-            // Hitta användaren
-            const user = users.find(u => u.username === username && u.password === password); // OBS! Klartext-jämförelse
+            // Försök hitta användaren baserat på antingen användarnamn ELLER e-post
+            const user = users.find(u =>
+                (u.username.toLowerCase() === identifier.toLowerCase() || u.email.toLowerCase() === identifier.toLowerCase()) &&
+                u.password === password
+            );
 
             if (user) {
-                // Logga in användaren
-                localStorage.setItem('loggedInUser', username);
-                alert(`Välkommen, ${username}! Du är nu inloggad.`);
-                window.location.href = 'index.html'; // Omdirigera till startsidan eller där användaren kom ifrån
+                // Logga in användaren. Vi sparar användarnamnet i localStorage för att visa det i headern.
+                localStorage.setItem('loggedInUser', user.username);
+                alert(`Välkommen, ${user.username}! Du är nu inloggad.`);
+                window.location.href = 'index.html'; // Omdirigera
             } else {
-                alert('Felaktigt användarnamn eller lösenord.');
-                usernameInput.value = ''; // Rensa fält
+                alert('Felaktigt användarnamn/e-post eller lösenord.');
+                identifierInput.value = ''; // Rensa fält
                 passwordInput.value = '';
             }
         });

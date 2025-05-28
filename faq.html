@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanliga Frågor - Gamersportal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+    <div class="container header-grid">
+        <div class="header-logo">
+            <a href="index.html">Gamersportal</a>
+        </div>
+        <div class="header-search">
+            <input type="search" id="header-search-input" placeholder="Sök spel...">
+            <a href="#" id="header-search-btn" class="search-btn btn">Sök</a>
+        </div>
+        <div class="header-user-actions" id="header-user-actions">
+            <a href="wishlist.html" class="btn wishlist-btn">Önskelista (<span id="wishlist-count">0</span>)</a>
+            <a href="login.html" class="btn login-btn" id="auth-status">Logga In</a>
+            <a href="cart.html" class="btn cart-btn">Varukorg (<span id="cart-count">0</span>)</a>
+        </div>
+    </div>
+</header>
+
+<main class="container page-content faq-page">
+    <h1>Vanliga Frågor (FAQ)</h1>
+
+    <nav class="faq-navigation">
+        <h2>Snabbnavigering:</h2>
+        <ul>
+            <li><a href="#konto">Mitt Konto</a></li>
+            <li><a href="#bestallning">Beställning & Leverans</a></li>
+            <li><a href="#retur">Returer & Återbetalningar</a></li>
+            <li><a href="#teknisk-support">Teknisk Support</a></li>
+            <li><a href="#spelbibliotek">Spelbibliotek & Köpta Spel</a></li>
+            <li><a href="#betalning">Betalningsalternativ</a></li>
+        </ul>
+    </nav>
+
+    <section class="faq-section">
+        <h2 id="konto">Mitt Konto</h2>
+
+        <div class="faq-item">
+            <h3>Hur skapar jag ett konto?</h3>
+            <p>Klicka på "Registrera dig" i sidhuvudet och fyll i dina uppgifter. Det är snabbt och enkelt!</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Jag har glömt mitt lösenord, vad gör jag?</h3>
+            <p>Tyvärr har vi ingen funktion för att återställa lösenord just nu. Kontakta supporten om du har problem med att logga in.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Kan jag ändra min e-postadress?</h3>
+            <p>För närvarande kan e-postadressen inte ändras efter registrering. Vänligen kontakta vår support om du behöver hjälp med detta.</p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 id="bestallning">Beställning & Leverans</h2>
+
+        <div class="faq-item">
+            <h3>Hur lägger jag en beställning?</h3>
+            <p>När du hittat ett spel du vill köpa, klickar du på "Lägg i varukorg". Gå sedan till varukorgen och klicka på "Slutför Köp". Observera att du måste vara inloggad för att kunna genomföra ett köp.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Hur får jag mitt spel efter köp?</h3>
+            <p>Alla spel är digitala. Efter ett slutfört köp läggs spelen automatiskt till i ditt personliga spelbibliotek som du hittar under din profil. Du kan sedan ladda ner och installera dem därifrån.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Kan jag avbryta en beställning?</h3>
+            <p>Digitala köp är normalt sett slutgiltiga. Kontakta vår support omedelbart om du har problem med en nyligen genomförd beställning.</p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 id="retur">Returer & Återbetalningar</h2>
+
+        <div class="faq-item">
+            <h3>Kan jag returnera ett digitalt spel?</h3>
+            <p>På grund av digitala produkters natur är returer och återbetalningar generellt inte möjliga efter att ett spel har levererats till ditt bibliotek. Undantag kan göras vid tekniska fel som förhindrar spelet från att fungera.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Vad gör jag om mitt spel inte fungerar?</h3>
+            <p>Kontrollera först att din dator uppfyller spelets systemkrav. Om problemet kvarstår, kontakta vår tekniska support med en detaljerad beskrivning av problemet.</p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 id="teknisk-support">Teknisk Support</h2>
+
+        <div class="faq-item">
+            <h3>Hur kontaktar jag teknisk support?</h3>
+            <p>Du kan kontakta oss via vårt kontaktformulär (länk finns längst ned) eller skicka ett e-postmeddelande till support@gamersportal.se. Ange alltid ditt användarnamn och en detaljerad beskrivning av ditt problem.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Erbjuder ni support för specifika spel?</h3>
+            <p>Vi erbjuder allmän teknisk support relaterad till plattformen och nedladdning av spel. För spelrelaterade problem (buggar i spelet, gameplay-frågor), rekommenderar vi att du även besöker spelets officiella forum eller supportsida.</p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 id="spelbibliotek">Spelbibliotek & Köpta Spel</h2>
+
+        <div class="faq-item">
+            <h3>Var hittar jag mina köpta spel?</h3>
+            <p>Alla spel du har köpt finns samlade i ditt spelbibliotek, som du kommer åt via "Min Profil" när du är inloggad. Vilket du kan komma åt genom att trycka på ditt användarnamn i toppen</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Hur tar jag bort ett spel från mitt bibliotek?</h3>
+            <p>Du kan ta bort ett spel från ditt bibliotek genom att navigera till "Min Profil" och klicka på "Ta bort från bibliotek" under det aktuella spelet. Observera att detta tar bort spelet permanent från ditt konto, och du kommer att behöva köpa det igen om du vill spela det i framtiden.</p>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 id="betalning">Betalningsalternativ</h2>
+
+        <div class="faq-item">
+            <h3>Vilka betalningsmetoder accepterar ni?</h3>
+            <p>För närvarande accepterar vi Matercard, Visa och swish (inte faktiskt, fake webbsida)</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Är mina betalningsuppgifter säkra?</h3>
+            <p>Ja, vi använder oss av krypterade anslutningar och säkra betalningsgateways för att skydda dina uppgifter.</p>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="container footer-grid">
+        <div class="footer-logo">Gamersportal</div>
+        <div class="footer-info">
+            <p>Information</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=LhGqB69cXAE">Om Oss</a></li>
+                <li><a href="https://www.youtube.com/watch?v=MJdqCOG_wVQ">Kontakta Oss</a></li>
+                <li><a href="https://youtu.be/GDjjXw-ezDU?t=32">Sekretesspolicy</a></li>
+            </ul>
+        </div>
+        <div class="footer-faq">
+            <h3>Vanliga Frågor</h3>
+            <ul>
+                <li><a href="faq.html#konto">Mitt Konto</a></li>
+                <li><a href="faq.html#bestallning">Beställning & Leverans</a></li>
+                <li><a href="faq.html#retur">Returer & Återbetalningar</a></li>
+                <li><a href="faq.html#teknisk-support">Teknisk Support</a></li>
+            </ul>
+        </div>
+        <div class="footer-heading">
+            <p>Följ Oss</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Facebook</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Twitter</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Instagram</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

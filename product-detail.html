@@ -11,7 +11,7 @@
 <header>
     <div class="container header-grid">
         <div class="header-logo">
-            <a href="index.html">Logga</a>
+            <a href="index.html">Gamersportal</a>
         </div>
         <div class="header-search">
             <input type="search" id="header-search-input" placeholder="Sök spel...">
@@ -19,7 +19,7 @@
         </div>
         <div class="header-user-actions" id="header-user-actions">
             <a href="wishlist.html" class="btn wishlist-btn">Önskelista (<span id="wishlist-count">0</span>)</a>
-            <a href="login.html" class="btn login-btn" id="login-link">Logga In</a>
+            <a href="login.html" class="btn login-btn" id="auth-status">Logga In</a>
             <a href="cart.html" class="btn cart-btn">Varukorg (<span id="cart-count">0</span>)</a>
         </div>
     </div>
@@ -27,32 +27,53 @@
 
 <main class="container product-detail-layout">
     <section class="product-detail-section">
-        <div class="product-image-container">
-            <img id="product-detail-image" src="images/placeholder.jpg" alt="Produktbild">
+        <div class="product-image">
+            <img id="product-detail-image" src="images/placeholder.jpg" alt="Spelomslag">
         </div>
-        <div class="product-info-container">
-            <h1 id="product-detail-name">Spelnamn</h1>
-            <p class="product-detail-price" id="product-detail-price">--- SEK</p>
-            <div class="product-detail-tags" id="product-detail-tags">
-            </div>
-            <p id="product-detail-description">Produkten laddas...</p>
-            <button class="btn primary-btn add-to-cart-btn" id="product-detail-add-to-cart">Lägg till i varukorg</button>
+        <div class="product-info">
+            <h1 id="product-detail-name">Laddar spel...</h1>
+            <p class="product-price" id="product-detail-price"></p>
+            <p class="product-description" id="product-detail-description"></p>
+            <div id="product-detail-tags"></div> <div class="product-actions">
+            <button class="btn primary-btn" id="product-detail-add-to-cart"></button>
+            <button class="btn secondary-btn" id="product-detail-add-to-wishlist"></button> </div>
         </div>
     </section>
 </main>
 
 <footer>
     <div class="container footer-grid">
-        <div class="footer-logo">Logga</div>
+        <div class="footer-logo">Gamersportal</div>
         <div class="footer-info">
             <p>Information</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=LhGqB69cXAE">Om Oss</a></li>
+                <li><a href="https://www.youtube.com/watch?v=MJdqCOG_wVQ">Kontakta Oss</a></li>
+                <li><a href="https://youtu.be/GDjjXw-ezDU?t=32">Sekretesspolicy</a></li>
+            </ul>
+        </div>
+        <div class="footer-faq">
+            <h3>Vanliga Frågor</h3>
+            <ul>
+                <li><a href="faq.html#konto">Mitt Konto</a></li>
+                <li><a href="faq.html#bestallning">Beställning & Leverans</a></li>
+                <li><a href="faq.html#retur">Returer & Återbetalningar</a></li>
+                <li><a href="faq.html#teknisk-support">Teknisk Support</a></li>
+            </ul>
         </div>
         <div class="footer-heading">
-            <p>Heading</p>
+            <p>Följ Oss</p>
+            <ul>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Facebook</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Twitter</a></li>
+                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Instagram</a></li>
+            </ul>
         </div>
     </div>
 </footer>
 
 <script src="data.js"></script>
-<script src="product-detail.js"></script> <script src="js/script.js"></script> </body>
+<script src="script.js"></script>
+<script src="product-detail.js"></script>
+</body>
 </html>
