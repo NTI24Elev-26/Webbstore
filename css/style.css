@@ -171,54 +171,90 @@ main {
     font-size: 2rem;
 }
 
+/* style.css */
+
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 4 kolumner, justeras på mindre skärmar */
-    gap: 20px;
-    margin-bottom: 25px; /* Mellanrum till "Visa mer"-knapp */
+    /* responsive grid, justerar kolumner beroende på skärmbredd */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px; /* Mellanrum mellan korten */
+    padding: 20px 0; /* Marginaler runt griden */
+    justify-content: center; /* Centrerar griden om det finns för få kort för att fylla en rad */
 }
+
+/* Du kan också lägga till media queries för att justera minmax vid olika skärmstorlekar */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .product-grid {
+        grid-template-columns: 1fr; /* En kolumn på små skärmar */
+    }
+    .product-card {
+        max-width: 300px; /* Begränsa bredden på kortet på mobila enheter */
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+/* style.css */
 
 .product-card {
-    background-color: var(--bg-color); /* Lättare bakgrund för korten */
+    background-color: var(--card-bg-color); /* bakgrundsfärg */
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
     padding: 15px;
-    text-align: center;
-    display: flex;
+    box-shadow: var(--shadow-sm); /* litte skugga */
+    text-align: center; /* Centrerar text och knappar under bilden */
+    display: flex; /* flexbox för att organisera innehållet vertikalt */
     flex-direction: column;
-    align-items: center;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
+    justify-content: space-between; /* Sprider ut innehållet (bild, titel, pris, knappar) */
+    overflow: hidden; /* Dölj eventuellt innehåll som går utanför kortet */
 }
 
 .product-image-placeholder {
+    width: 100%; /* Fyller upp kortets bredd */
+    padding-top: 100%; /* Skapar en kvadratisk yta (1:1 aspekt ratio) */
+    /* Eller en fast höjd om du föredrar det: */
+    /* height: 200px; */
+    position: relative; /* Nödvändigt för att positionera bilden inuti */
+    background-color: var(--placeholder-bg-color); /* Bakgrundsfärg om bilden laddar långsamt */
+    margin-bottom: 10px; /* Mellanslag mellan bild och text */
+    overflow: hidden; /* Döljer delar av bilden om den är större än placeholder */
+    border-radius: 4px; /* Liten rundning på bildbehållaren */
+}
+
+.product-image-placeholder img {
+    position: absolute; /* Positionera bilden absolut inuti placeholder */
+    top: 0;
+    left: 0;
     width: 100%;
-    /* Aspect ratio 4:3 för att likna wireframens boxar */
-    padding-bottom: 75%; /* 3/4 av bredden för höjd */
-    background-color: var(--placeholder-bg);
-    border-radius: 5px;
+    height: 100%;
+    object-fit: cover; /* SKALERAR BILDEN SÅ DEN TÄCKER HELA YTAN UTAN ATT DEFORMERAS */
+    /* object-fit: contain; om du vill att hela bilden ska synas, även om det blir tomrum */
+    border-radius: 4px; /* Matchar placeholder-radien */
+}
+
+.product-title {
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    min-height: 2.5em; /* Ge titeln en minsta höjd för att undvika layout-skiftningar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.price {
+    color: var(--accent-color); /* Din accentfärg */
+    font-size: 1.1em;
     margin-bottom: 10px;
-    position: relative; /* För att kunna lägga till en X */
 }
 
-.product-image-placeholder::before,
-.product-image-placeholder::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 60%; /* Storleken på X */
-    height: 3px;
-    background-color: var(--text-color);
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.product-image-placeholder::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
+.product-card .btn {
+    width: 100%; /* Gör knapparna lika breda som kortet */
+    margin-top: 8px; /* Mellanslag mellan knappar */
 }
 
 .product-title {
