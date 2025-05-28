@@ -1,4 +1,3 @@
-// js/register.js
 document.addEventListener('DOMContentLoaded', () => {
     const registerForm = document.getElementById('register-form');
 
@@ -29,22 +28,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Hämta befintliga användare eller skapa en tom array
-            // Varje användare lagras nu som { username: "...", email: "...", password: "..." }
+            // Hämtar befintliga användare eller skapa en tom array
+            // Varje användare lagras som { username: "...", email: "...", password: "..." }
             const users = JSON.parse(localStorage.getItem('users')) || [];
 
-            // Kontrollera om användarnamnet redan finns
+            // Kontrollerar om användarnamnet redan finns
             if (users.some(user => user.username.toLowerCase() === username.toLowerCase())) {
                 alert('Användarnamnet är redan upptaget. Välj ett annat.');
                 return;
             }
-            // Kontrollera om e-posten redan finns
+            // Kontrollerar om e-posten redan finns
             if (users.some(user => user.email.toLowerCase() === email.toLowerCase())) {
                 alert('E-postadressen är redan registrerad. Välj en annan.');
                 return;
             }
 
-            // Lägg till den nya användaren
+            // Lägger till den nya användaren
             users.push({ username: username, email: email, password: password }); // Uppdaterad datastruktur
             localStorage.setItem('users', JSON.stringify(users));
 

@@ -1,5 +1,3 @@
-// js/profile.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const loggedInUsername = localStorage.getItem('loggedInUser');
     if (!loggedInUsername) {
@@ -113,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showGameLibraryBtn.addEventListener('click', () => showSection(gameLibrarySection));
     }
 
-    // --- NY FUNKTION: Ta bort spel från biblioteket ---
+    // --- Ta bort spel från biblioteket ---
     window.removeFromOwnedGames = (gameId) => {
         const loggedInUser = localStorage.getItem('loggedInUser');
         if (!loggedInUser) {
@@ -138,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // --- Rendera Spelbiblioteket (UPPDATERAD) ---
+    // --- Rendera Spelbiblioteket ---
     function renderGameLibrary(user) {
         ownedGamesGrid.innerHTML = '';
         // ownedGames är nu en array av bara ID:n igen
@@ -157,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ownedGamesGrid.appendChild(window.renderGameCard(game, {
                     showAddToCart: false,
                     showAddToWishlist: false,
-                    showRemoveFromLibrary: true // NY: Visa "Ta bort från bibliotek"-knappen
+                    showRemoveFromLibrary: true //Visa "Ta bort från bibliotek"-knappen
                 }));
             }
         });

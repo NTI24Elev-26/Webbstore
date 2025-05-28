@@ -1,10 +1,7 @@
-// js/script.js
-
 // games-arrayen antas vara laddad från data.js
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Global Sökfunktionalitet från headern (oförändrad) ---
+    // --- Global Sökfunktionalitet från headern ---
     const headerSearchInput = document.getElementById('header-search-input');
     const headerSearchBtn = document.getElementById('header-search-btn');
 
@@ -107,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     addToWishlistBtn.style.display = 'none'; // Dölj den om den lagts till
                 }
             }
-            // NY: Uppdatera knappen på andra sidor (index/products) om den är synlig
+            // Uppdaterar knappen på andra sidor (index/products) om den är synlig
             const allWishlistButtons = document.querySelectorAll(`[data-product-id="${productId}"].add-to-wishlist-btn`);
             allWishlistButtons.forEach(btn => {
                 btn.style.display = 'none'; // Eller ändra text till "På önskelistan" och disable
@@ -191,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.appendChild(price);
         article.appendChild(link);
 
-        // Kontrollera om spelet redan ägs av den inloggade användaren (UPPDATERAD FÖR UNIKA ID:N)
+        // Kontrollera om spelet redan ägs av den inloggade användaren (ANVÄNDER UNIKA ID:N)
         const loggedInUser = localStorage.getItem('loggedInUser');
         let userOwnsGame = false;
         if (loggedInUser) {
@@ -262,11 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
             article.appendChild(removeButton);
         }
 
-        // Kvantitetskontroller tas bort för varukorgen men kvar i renderGameCard (om det behövs för andra syften)
-        // I detta scenario med "bara en kopia", behövs de inte här.
-        // options.showQuantityControls och options.quantity är nu irrelevant för varukorgen/biblioteket.
-        // Om du har en annan sida där du vill visa kvantitet för ett kort, kan du behålla den här sektionen.
-        // För biblioteket kommer vi inte att visa det, bara att det "ägs".
+        // biblioteket kommer bara visa att det "ägs".
         if (options.showQuantityControls && options.quantity !== undefined) {
             const quantityContainer = document.createElement('div');
             quantityContainer.classList.add('quantity-controls');
@@ -294,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Rendera varukorgssidan (`cart.html`) (UPPDATERAD) ---
+    // --- Rendera varukorgssidan (`cart.html`) ---
     window.renderCartPage = function() {
         const cartItemsContainer = document.getElementById('cart-items');
         const cartSummaryDiv = document.getElementById('cart-summary');
@@ -421,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- Rendera önskelistan (`wishlist.html`) (oförändrad, fungerar redan med ID-lista) ---
+    // --- Rendera önskelistan (`wishlist.html`) ---
     window.renderWishlistPage = function() {
         const wishlistItemsContainer = document.getElementById('wishlist-items');
         const wishlistEmptyMessage = document.getElementById('wishlist-empty-message');
@@ -448,7 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // --- Användarstatus och Inloggning/Utloggning (oförändrad) ---
+    // --- Användarstatus och Inloggning/Utloggning ---
     const loggedInUser = localStorage.getItem('loggedInUser');
     const userActionsDiv = document.getElementById('header-user-actions');
     const authStatusElement = document.getElementById('auth-status');
@@ -495,4 +488,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
-// (Sticky Header Logik kan vara kvar som den är.)

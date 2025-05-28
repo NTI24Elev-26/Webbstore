@@ -1,5 +1,3 @@
-// js/product-detail.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const gameId = urlParams.get('id');

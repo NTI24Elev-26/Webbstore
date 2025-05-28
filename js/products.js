@@ -1,5 +1,3 @@
-// js/products.js
-// js/products.js
 document.addEventListener('DOMContentLoaded', () => {
     const allGamesGrid = document.getElementById('all-games-grid');
     const productsHeading = document.getElementById('products-heading');
@@ -37,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         buyButton.dataset.productId = game.id;
         buyButton.textContent = 'Köp';
 
-        // Add event listener for the buy button
+        // Lägg till event listener för köp button
         buyButton.addEventListener('click', (event) => {
             event.preventDefault(); // Prevent default link behavior if inside an <a> tag
             addToCart(game.id);
@@ -128,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
         productsHeading.textContent = headingText;
     }
 
-    // --- Initial rendering of filters ---
+    // --- Initial rendering av filters ---
     function populateTagFilters() {
         const allTags = new Set();
         games.forEach(game => {
@@ -189,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Sidebar Search Functionality
+    // Sidebar Search Funktionalitet
     sidebarSearchInput.addEventListener('input', (event) => {
         currentSearchTerm = event.target.value.trim();
         applyFiltersAndRender();
@@ -216,9 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial load
     populateTagFilters();
     applyFiltersAndRender();
-
-    // Add To Cart Functionality (Moved from script.js, or keep in script.js and call it)
-    // This function will be called when a "Köp" button is clicked.
+    // Funktionen kallas köp när den blir klickad
     window.addToCart = function(productId) { // Make it global or pass it around
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const productToAdd = games.find(game => game.id === productId);

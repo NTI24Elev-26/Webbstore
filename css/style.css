@@ -74,9 +74,9 @@ a:hover {
 
 /* Header - Anpassad till Wireframe */
 header {
-    /* Grundläggande stilar för din header (som den såg ut innan position: fixed) */
-    background-color: var(--header-bg); /* Anta att du har en variabel för detta */
-    padding: 20px 0; /* Din befintliga padding */
+    /* Grundläggande stilar för header */
+    background-color: var(--header-bg);
+    padding: 20px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Liten skugga */
     width: 100%;
     z-index: 1000; /* Viktigt för att den ska ligga över annat innehåll när den väl blir fixed */
@@ -85,17 +85,15 @@ header {
     transition: all 0.3s ease-in-out;
 
     /* VIKTIGT: Ingen position: fixed; HÄR initialt */
-    position: relative; /* Standardbeteende, eller ta bort denna rad om du inte har en specifik position */
-    top: 0; /* Se till att den ligger överst initialt */
+    position: relative;
+    top: 0; /* Ser till att den ligger överst initialt */
 }
 header.fixed {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    /* Du kan ändra stilar här om du vill att headern ska se annorlunda ut när den är fixed */
-    /* t.ex. mer kompakt, annan bakgrundsfärg */
-    background-color: var(--header-bg-fixed, #1a1a1a); /* Lätt mörkare om du vill */
+    background-color: var(--header-bg-fixed, #1a1a1a);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -103,7 +101,7 @@ header.fixed {
     align-items: center;
     justify-content: space-between;
     display: grid;
-    grid-template-columns: auto 1fr auto; /* Justera detta om du har en annan layout */
+    grid-template-columns: auto 1fr auto;
     gap: 20px; /* Mellanrum mellan elementen */
 }
 
@@ -117,7 +115,7 @@ header.fixed {
 
 .header-search {
     display: flex;
-    margin-left: auto; /* Trycker den åt höger om du har en logo till vänster */
+    margin-left: auto; /* Trycker den åt höger om man har en logo till vänster */
     gap: 5px;
 }
 
@@ -145,7 +143,7 @@ header.fixed {
     align-items: center;
 }
 
-/* Main Content - Anpassad till Wireframe */
+/* Main Content */
 main {
     padding: 40px 0;
 }
@@ -155,7 +153,7 @@ main {
     margin-top: 20px;
     flex-direction: column; /* Staplar sektionerna vertikalt */
     gap: 40px; /* Mellanrum mellan sektionerna */
-    padding-top: 40px; /* Exempel, justera detta värde */
+    padding-top: 40px;
 }
 
 .product-section {
@@ -166,12 +164,10 @@ main {
 }
 
 .product-section h2 {
-    text-align: left; /* Enligt wireframe, "Text" som rubrik */
+    text-align: left;
     margin-bottom: 25px;
     font-size: 2rem;
 }
-
-/* style.css */
 
 .product-grid {
     display: grid;
@@ -182,7 +178,6 @@ main {
     justify-content: center; /* Centrerar griden om det finns för få kort för att fylla en rad */
 }
 
-/* Du kan också lägga till media queries för att justera minmax vid olika skärmstorlekar */
 @media (max-width: 768px) {
     .product-grid {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -199,24 +194,22 @@ main {
         margin-right: auto;
     }
 }
-/* style.css */
 
 .product-card {
     background-color: var(--card-bg-color); /* bakgrundsfärg */
     border-radius: 8px;
     padding: 15px;
-    box-shadow: var(--shadow-sm); /* litte skugga */
+    box-shadow: var(--shadow-sm); /* lite skugga */
     text-align: center; /* Centrerar text och knappar under bilden */
     display: flex; /* flexbox för att organisera innehållet vertikalt */
     flex-direction: column;
     justify-content: space-between; /* Sprider ut innehållet (bild, titel, pris, knappar) */
-    overflow: hidden; /* Dölj eventuellt innehåll som går utanför kortet */
+    overflow: hidden; /* Döljer eventuellt innehåll som går utanför kortet */
 }
 
 .product-image-placeholder {
     width: 100%; /* Fyller upp kortets bredd */
     padding-top: 100%; /* Skapar en kvadratisk yta (1:1 aspekt ratio) */
-    /* Eller en fast höjd om du föredrar det: */
     /* height: 200px; */
     position: relative; /* Nödvändigt för att positionera bilden inuti */
     background-color: var(--placeholder-bg-color); /* Bakgrundsfärg om bilden laddar långsamt */
@@ -232,7 +225,7 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover; /* SKALERAR BILDEN SÅ DEN TÄCKER HELA YTAN UTAN ATT DEFORMERAS */
-    /* object-fit: contain; om du vill att hela bilden ska synas, även om det blir tomrum */
+    /* object-fit: contain; om man vill att hela bilden ska synas, även om det blir tomrum */
     border-radius: 4px; /* Matchar placeholder-radien */
 }
 
@@ -247,7 +240,7 @@ main {
 }
 
 .price {
-    color: var(--accent-color); /* Din accentfärg */
+    color: var(--accent-color); /* accentfärg */
     font-size: 1.1em;
     margin-bottom: 10px;
 }
@@ -280,15 +273,12 @@ main {
     width: fit-content;
 }
 
-/* Footer - Anpassad till Wireframe */
 footer {
     background-color: var(--card-bg);
     padding: 30px 0;
     text-align: center;
     border-top: 1px solid var(--border-color);
 }
-
-/* In style.css */
 
 .footer-grid {
     display: grid;
@@ -310,8 +300,8 @@ footer {
 .footer-info,
 .footer-faq,
 .footer-heading {
-    /* Basic styling for these sections */
-    grid-column: span 1; /* Each spans 1 column */
+    /* Basic styling för sektionerna */
+    grid-column: span 1; /* Varje spans 1 kolumn */
 }
 
 .footer-info p,
@@ -319,7 +309,7 @@ footer {
 .footer-heading p {
     font-weight: bold;
     margin-bottom: 10px;
-    color: var(--text-color-light); /* Or adjust as per your theme */
+    color: var(--text-color-light);
 }
 
 .footer-info ul,
@@ -333,10 +323,10 @@ footer {
 .footer-info ul li a,
 .footer-faq ul li a,
 .footer-heading ul li a {
-    color: var(--text-color-light-alt); /* Lighter text for links */
+    color: var(--text-color-light-alt); /* Ljusare text för länkar */
     text-decoration: none;
     line-height: 1.8;
-    display: block; /* Make the whole list item clickable */
+    display: block; /* Gör hela list item klickbar */
 }
 
 .footer-info ul li a:hover,
@@ -401,7 +391,7 @@ footer {
 }
 
 .box-placeholder {
-    width: 80px; /* Storlek som matchar wireframen */
+    width: 80px; /* Storlek som försöker matcha wireframen så gott som möjligt */
     height: 80px;
     background-color: var(--placeholder-bg);
     border-radius: 5px;
@@ -417,9 +407,6 @@ footer {
         order: -1; /* Flyttar sidopanelen ovanför produkterna på små skärmar */
     }
 }
-/* ... (befintliga stilar) ... */
-
-/* Product Detail Page Styles */
 .product-detail-layout {
     display: flex;
     justify-content: center;
@@ -502,7 +489,7 @@ footer {
     align-self: flex-start; /* Placera knappen till vänster */
 }
 
-/* Products Page Sidebar Adjustments */
+/* Products Page Sidebar Justeringar... */
 .sidebar ul li {
     padding: 8px 0;
     border-bottom: 1px solid var(--border-color);
@@ -520,7 +507,7 @@ footer {
 }
 
 
-/* Responsivitet för produktdetaljsidan */
+/* Responsivitet för product-detail sidan */
 @media (max-width: 768px) {
     .product-detail-section {
         flex-direction: column;
@@ -533,9 +520,6 @@ footer {
         width: 100%; /* Knapp tar full bredd på mobil */
     }
 }
-/* ... (befintliga stilar) ... */
-
-/* --- Login Popup Styles --- */
 .login-popup {
     display: none; /* Dold som standard */
     position: absolute; /* Positioneras relativt till närmaste positionerade förälder (body/header) */
@@ -638,7 +622,7 @@ footer {
     color: var(--primary-color);
 }
 
-/* Base styles for form pages (login.html, register.html) */
+/* bas styles för form pages (login.html, register.html) */
 .form-page {
     max-width: 450px;
     margin: 50px auto;
@@ -669,7 +653,7 @@ footer {
 
 .auth-form input[type="text"],
 .auth-form input[type="password"],
-.auth-form input[type="email"] { /* Lägg till email om du planerar det */
+.auth-form input[type="email"] {
     width: calc(100% - 24px); /* Justera för padding och border */
     padding: 12px;
     border: 1px solid var(--border-color);
@@ -718,9 +702,6 @@ footer {
         right: 5%;
     }
 }
-/* style.css */
-
-/* ... dina befintliga stilar ... */
 
 .product-detail-page .product-actions {
     margin-top: 30px; /* Ge lite utrymme under pris/beskrivning */
@@ -742,26 +723,13 @@ footer {
     text-decoration: underline;
     font-weight: bold;
 }
-/* style.css */
 
-/* ... (befintliga stilar) ... */
-
-/* Profile Page Layout - UPDATED */
-/* Ta bort grid-layouten från .profile-layout */
 .profile-layout {
     /* display: grid; */ /* Ta bort denna */
     /* grid-template-columns: 1fr; */ /* Ta bort denna */
     gap: 40px; /* Behåll gapet mellan sektionerna */
     padding-top: 40px;
 }
-
-/* Du kan ta bort detta media query om du inte har någon annan grid-layout på profilsidan */
-/* @media (min-width: 768px) {
-    .profile-layout {
-        grid-template-columns: 250px 1fr;
-    }
-} */
-
 
 .profile-sidebar {
     background-color: var(--card-bg); /* Behåll bakgrund/padding för att rama in knapparna */
@@ -771,7 +739,7 @@ footer {
     margin-bottom: 40px; /* Lägg till mellanrum under menyn */
 }
 
-/* Ny stil för att göra profilmenyn inline (horisontell) */
+/* stil för att göra profilmenyn inline (horisontell) */
 .profile-nav-inline ul {
     display: flex; /* Gör listan flexibel */
     flex-wrap: wrap; /* Tillåter radbrytning på små skärmar */
@@ -842,7 +810,7 @@ footer {
     color: var(--secondary-color);
 }
 
-/* Specific for game library grid within profile */
+/* Specifik för game library grid inom profile */
 #owned-games-grid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
@@ -867,11 +835,7 @@ footer {
         width: 80%; /* Knapparna kan ta mer bredd */
     }
 }
-/* style.css */
 
-/* ... (befintliga stilar) ... */
-
-/* Modal Styles */
 .modal {
     display: none; /* Dold som standard */
     position: fixed; /* Stannar på plats även vid scroll */
