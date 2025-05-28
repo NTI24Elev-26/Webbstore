@@ -45,23 +45,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addToCart = (productId) => {
-        if (!cart.includes(productId)) { // Kontrollera om spelet redan finns i varukorgen
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+            alert('Du måste vara inloggad för att lägga till spel i varukorgen.');
+            window.location.href = 'login.html';
+            return; // Avsluta funktionen om användaren inte är inloggad
+        }
+
+        if (!cart.includes(productId)) {
             cart.push(productId);
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCounts();
             alert(`"${games.find(g => g.id === productId).name}" har lagts till i varukorgen!`);
-            // Uppdatera produktsidan om funktionen finns där
             if (typeof renderCartPage === 'function') renderCartPage();
-            // Uppdatera knappen på produktdetaljsidan (om vi är där)
+            // Uppdatera knappen på produktdetaljsidan (om vi är där) - denna logik kan förenklas om du använder den globala renderGameCard smartare
             if (window.location.pathname.includes('product-detail.html')) {
-                // Enkel lösning för att tvinga uppdatering av knappen på detaljsidan
-                // Bättre att ha en specifik uppdateringsfunktion i product-detail.js
                 const addToCartBtn = document.getElementById('product-detail-add-to-cart');
                 if (addToCartBtn) {
                     addToCartBtn.textContent = 'I varukorgen';
                     addToCartBtn.disabled = true;
                 }
             }
+            // NY: Uppdatera knapparna på andra sidor (index/products) om de är synliga
+            const allBuyButtons = document.querySelectorAll(`[data-product-id="${productId}"].add-to-cart-btn`);
+            allBuyButtons.forEach(btn => {
+                btn.textContent = 'I varukorgen';
+                btn.disabled = true;
+            });
         } else {
             alert('Denna produkt finns redan i varukorgen.');
         }
@@ -78,6 +88,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // window.changeCartQuantity = (productId, change) => { ... };
 
     window.addToWishlist = (productId) => {
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+            alert('Du måste vara inloggad för att lägga till spel på önskelistan.');
+            window.location.href = 'login.html';
+            return; // Avsluta funktionen om användaren inte är inloggad
+        }
+
         if (!wishlist.includes(productId)) {
             wishlist.push(productId);
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
@@ -91,6 +108,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     addToWishlistBtn.style.display = 'none'; // Dölj den om den lagts till
                 }
             }
+            // NY: Uppdatera knappen på andra sidor (index/products) om den är synlig
+            const allWishlistButtons = document.querySelectorAll(`[data-product-id="${productId}"].add-to-wishlist-btn`);
+            allWishlistButtons.forEach(btn => {
+                btn.style.display = 'none'; // Eller ändra text till "På önskelistan" och disable
+            });
+
         } else {
             alert('Denna produkt finns redan i önskelistan.');
         }
